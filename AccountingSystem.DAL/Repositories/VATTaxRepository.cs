@@ -7,23 +7,16 @@ namespace AccountingSystem.DAL.Repositories
 {
     public class VATTaxRepository
     {
-        private readonly string _connectionString;
+        private readonly DapperContext context;
 
-        public VATTaxRepository(string connectionString)
+        public VATTaxRepository(DapperContext context)
         {
-            _connectionString = connectionString;
+            this.context = context;
         }
-
-        public IDbConnection CreateConnection()
-        {
-            return new SqlConnection(_connectionString);
-        }
-
-        // VATTax Operations
 
         public IEnumerable<VATTax> GetAll()
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Query<VATTax>("SELECT * FROM VATTaxes");
             }
@@ -31,7 +24,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public VATTax GetById(int vatId)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.QueryFirstOrDefault<VATTax>("SELECT * FROM VATTaxes WHERE VATID = @VATId", new { VATId = vatId });
             }
@@ -39,7 +32,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Insert(VATTax vatTax)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("INSERT INTO VATTaxes (VATRate, EffectiveDate) VALUES (@VATRate, @EffectiveDate); SELECT CAST(SCOPE_IDENTITY() as int)", vatTax);
             }
@@ -47,7 +40,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Update(VATTax vatTax)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("UPDATE VATTaxes SET VATRate = @VATRate, EffectiveDate = @EffectiveDate WHERE VATID = @VATID", vatTax);
             }
@@ -55,7 +48,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Delete(int vatId)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("DELETE FROM VATTaxes WHERE VATID = @VATId", new { VATId = vatId });
             }

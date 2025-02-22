@@ -7,7 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AccountingDbContext.cs" />
+    <Compile Remove="AccountingDbContextFactory.cs" />
     <Compile Remove="IUnitOfWork.cs" />
+    <Compile Remove="Repositories\IRepository.cs" />
+    <Compile Remove="Repositories\Repository.cs" />
     <Compile Remove="Repositories\UnitOfWork.cs" />
   </ItemGroup>
 
@@ -29,6 +33,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AccountingSystem.Models\AccountingSystem.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

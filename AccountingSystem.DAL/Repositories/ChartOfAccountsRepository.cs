@@ -7,23 +7,16 @@ namespace AccountingSystem.DAL.Repositories
 {
     public class ChartOfAccountsRepository
     {
-        private readonly string _connectionString;
+        private readonly DapperContext context;
 
-        public ChartOfAccountsRepository(string connectionString)
+        public ChartOfAccountsRepository(DapperContext context)
         {
-            _connectionString = connectionString;
+            this.context = context;
         }
-
-        public IDbConnection CreateConnection()
-        {
-            return new SqlConnection(_connectionString);
-        }
-
-        // ChartOfAccount Operations
 
         public IEnumerable<ChartOfAccount> GetAll()
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Query<ChartOfAccount>("SELECT * FROM ChartOfAccounts");
             }
@@ -31,7 +24,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public ChartOfAccount GetById(int accountId)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.QueryFirstOrDefault<ChartOfAccount>("SELECT * FROM ChartOfAccounts WHERE AccountID = @AccountId", new { AccountId = accountId });
             }
@@ -39,7 +32,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Insert(ChartOfAccount account)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("INSERT INTO ChartOfAccounts (AccountNumber, AccountName, AccountType, AccountGroup, OpeningBalance) VALUES (@AccountNumber, @AccountName, @AccountType, @AccountGroup, @OpeningBalance); SELECT CAST(SCOPE_IDENTITY() as int)", account);
             }
@@ -47,7 +40,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Update(ChartOfAccount account)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("UPDATE ChartOfAccounts SET AccountNumber = @AccountNumber, AccountName = @AccountName, AccountType = @AccountType, AccountGroup = @AccountGroup, OpeningBalance = @OpeningBalance WHERE AccountID = @AccountID", account);
             }
@@ -55,7 +48,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Delete(int accountId)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("DELETE FROM ChartOfAccounts WHERE AccountID = @AccountId", new { AccountId = accountId });
             }

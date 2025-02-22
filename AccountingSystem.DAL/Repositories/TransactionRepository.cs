@@ -7,23 +7,16 @@ namespace AccountingSystem.DAL.Repositories
 {
     public class TransactionRepository
     {
-        private readonly string _connectionString;
+        private readonly DapperContext context;
 
-        public TransactionRepository(string connectionString)
+        public TransactionRepository(DapperContext context)
         {
-            _connectionString = connectionString;
+            this.context = context;
         }
-
-        public IDbConnection CreateConnection()
-        {
-            return new SqlConnection(_connectionString);
-        }
-
-        // Transaction Operations
 
         public IEnumerable<Transaction> GetAll()
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Query<Transaction>("SELECT * FROM Transactions");
             }
@@ -31,7 +24,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public Transaction GetById(int transactionId)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.QueryFirstOrDefault<Transaction>("SELECT * FROM Transactions WHERE TransactionID = @TransactionId", new { TransactionId = transactionId });
             }
@@ -39,7 +32,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Insert(Transaction transaction)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("INSERT INTO Transactions (TransactionDate, TransactionNumber, Description, Reference) VALUES (@TransactionDate, @TransactionNumber, @Description, @Reference); SELECT CAST(SCOPE_IDENTITY() as int)", transaction);
             }
@@ -47,7 +40,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Update(Transaction transaction)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("UPDATE Transactions SET TransactionDate = @TransactionDate, TransactionNumber = @TransactionNumber, Description = @Description, Reference = @Reference WHERE TransactionID = @TransactionID", transaction);
             }
@@ -55,7 +48,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Delete(int transactionId)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("DELETE FROM Transactions WHERE TransactionID = @TransactionId", new { TransactionId = transactionId });
             }

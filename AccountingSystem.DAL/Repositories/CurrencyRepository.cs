@@ -7,21 +7,16 @@ namespace AccountingSystem.DAL.Repositories
 {
     public class CurrencyRepository
     {
-        private readonly string _connectionString;
+        private readonly DapperContext context;
 
-        public CurrencyRepository(string connectionString)
+        public CurrencyRepository(DapperContext context)
         {
-            _connectionString = connectionString;
-        }
-
-        public IDbConnection CreateConnection()
-        {
-            return new SqlConnection(_connectionString);
+            this.context = context;
         }
 
         public IEnumerable<Currency> GetAll()
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Query<Currency>("SELECT * FROM Currency");
             }
@@ -29,7 +24,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public Currency GetById(int currencyId)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.QueryFirstOrDefault<Currency>("SELECT * FROM Currency WHERE CurrencyID = @CurrencyId", new { CurrencyId = currencyId });
             }
@@ -37,7 +32,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public Currency GetByCode(string currencyCode)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.QueryFirstOrDefault<Currency>("SELECT * FROM Currency WHERE CurrencyCode = @CurrencyCode", new { CurrencyCode = currencyCode });
             }
@@ -45,7 +40,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Insert(Currency currency)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("INSERT INTO Currency (CurrencyCode, ExchangeRate) VALUES (@CurrencyCode, @ExchangeRate); SELECT CAST(SCOPE_IDENTITY() as int)", currency);
             }
@@ -53,7 +48,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Update(Currency currency)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("UPDATE Currency SET CurrencyCode = @CurrencyCode, ExchangeRate = @ExchangeRate WHERE CurrencyID = @CurrencyID", currency);
             }
@@ -61,7 +56,7 @@ namespace AccountingSystem.DAL.Repositories
 
         public int Delete(int currencyId)
         {
-            using (var connection = CreateConnection())
+            using (var connection = context.CreateConnection())
             {
                 return connection.Execute("DELETE FROM Currency WHERE CurrencyID = @CurrencyId", new { CurrencyId = currencyId });
             }

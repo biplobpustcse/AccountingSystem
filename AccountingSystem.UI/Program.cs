@@ -1,3 +1,4 @@
+using AccountingSystem.BLL;
 using AccountingSystem.DAL;
 using AccountingSystem.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -39,17 +40,18 @@ namespace AccountingSystem.UI
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) =>
                 {
-                    // Retrieve the connection string from configuration
-                    var connectionString = context.Configuration.GetConnectionString("DefaultConnection");
-                    //var connectionString = "Server=BIPLOB\\SQL2019;Database=DualAccountingDB;User Id=sa;Password=data;";
+                    services.AddSingleton<DapperContext>();
+                    services.AddTransient<ChartOfAccountsRepository>();
+                    services.AddTransient<IChartOfAccountService, ChartOfAccountService>();
+                    services.AddTransient<TransactionRepository>();
+                    services.AddTransient<ITransactionService, TransactionService>();
+                    services.AddTransient<TransactionDetailRepository>();
+                    services.AddTransient<ITransactionDetailService, TransactionDetailDetailService>();
+                    services.AddTransient<CurrencyRepository>();
+                    services.AddTransient<ICurrencyService, CurrencyService>();
+                    services.AddTransient<VATTaxRepository>();
+                    services.AddTransient<IVATTaxService, VATTaxService>();
 
-                    // Register the DbContext with the connection string
-                    services.AddDbContext<AccountingDbContext>(options =>
-                        options.UseSqlServer(connectionString));
-
-                    //// Register repositories, Unit of Work, and forms
-                    //services.AddScoped<IChartOfAccountsRepository, ChartOfAccountsRepository>();
-                    //services.AddScoped<IUnitOfWork, UnitOfWork>();
                     services.AddTransient<MainForm>();
                     // Register other forms as needed
                 });

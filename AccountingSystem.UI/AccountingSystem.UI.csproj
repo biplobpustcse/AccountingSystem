@@ -14,13 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\AccountingSystem.BLL\AccountingSystem.BLL.csproj" />
     <ProjectReference Include="..\AccountingSystem.DAL\AccountingSystem.DAL.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Update="appsettings.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
 
 </Project>
