@@ -52,19 +52,22 @@ namespace AccountingSystem.UI
         {
             try
             {
-                ChartOfAccount account = new ChartOfAccount
+                if (!string.IsNullOrEmpty(accountNumberTextBox.Text) && !string.IsNullOrEmpty(accountNameTextBox.Text))
                 {
-                    AccountNumber = accountNumberTextBox.Text,
-                    AccountName = accountNameTextBox.Text,
-                    AccountType = accountTypeComboBox.SelectedItem.ToString(),
-                    AccountGroup = accountGroupTextBox.Text,
-                    OpeningBalance = openingBalanceNumericUpDown.Value,
-                    CurrencyID = (int)currencyComboBox.SelectedValue, // Get CurrencyID from combobox
-                    IsActive = true
-                };
-                _chartOfAccountService.InsertChartOfAccount(account);
-                LoadChartOfAccounts();
-                ClearInputFields();
+                    ChartOfAccount account = new ChartOfAccount
+                    {
+                        AccountNumber = accountNumberTextBox.Text,
+                        AccountName = accountNameTextBox.Text,
+                        AccountType = accountTypeComboBox.SelectedItem.ToString(),
+                        AccountGroup = accountGroupTextBox.Text,
+                        OpeningBalance = openingBalanceNumericUpDown.Value,
+                        CurrencyID = (int)currencyComboBox.SelectedValue, // Get CurrencyID from combobox
+                        IsActive = true
+                    };
+                    _chartOfAccountService.InsertChartOfAccount(account);
+                    LoadChartOfAccounts();
+                    ClearInputFields();
+                }
             }
             catch (Exception ex)
             {
@@ -150,6 +153,30 @@ namespace AccountingSystem.UI
             openingBalanceNumericUpDown.Value = 0;
             currencyComboBox.SelectedIndex = -1; // Clear combobox selection
             isActiveCheckBox.Checked = false;
+        }
+
+        private void accountNumberTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(accountNumberTextBox.Text))
+            {
+                lblAccoutNumberValidation.Visible = true;
+            }
+            else
+            {
+                lblAccoutNumberValidation.Visible = false;
+            }
+        }
+
+        private void accountNameTextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(accountNameTextBox.Text))
+            {
+                accountNameLabelValidation.Visible = true;
+            }
+            else
+            {
+                accountNameLabelValidation.Visible = false;
+            }
         }
     }
 }

@@ -48,6 +48,8 @@
             updateButton = new Button();
             deleteButton = new Button();
             currencyComboBox = new ComboBox();
+            lblAccoutNumberValidation = new Label();
+            accountNameLabelValidation = new Label();
             ((System.ComponentModel.ISupportInitialize)chartOfAccountsDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)openingBalanceNumericUpDown).BeginInit();
             SuspendLayout();
@@ -158,6 +160,7 @@
             accountNumberTextBox.Name = "accountNumberTextBox";
             accountNumberTextBox.Size = new Size(174, 23);
             accountNumberTextBox.TabIndex = 10;
+            accountNumberTextBox.TextChanged += accountNumberTextBox_TextChanged;
             // 
             // accountNameTextBox
             // 
@@ -166,6 +169,7 @@
             accountNameTextBox.Name = "accountNameTextBox";
             accountNameTextBox.Size = new Size(174, 23);
             accountNameTextBox.TabIndex = 11;
+            accountNameTextBox.TextChanged += accountNameTextBox_TextChanged;
             // 
             // accountTypeComboBox
             // 
@@ -250,11 +254,35 @@
             currencyComboBox.Size = new Size(174, 23);
             currencyComboBox.TabIndex = 15;
             // 
+            // lblAccoutNumberValidation
+            // 
+            lblAccoutNumberValidation.AutoSize = true;
+            lblAccoutNumberValidation.ForeColor = Color.Red;
+            lblAccoutNumberValidation.Location = new Point(316, 348);
+            lblAccoutNumberValidation.Margin = new Padding(4, 0, 4, 0);
+            lblAccoutNumberValidation.Name = "lblAccoutNumberValidation";
+            lblAccoutNumberValidation.Size = new Size(12, 15);
+            lblAccoutNumberValidation.TabIndex = 20;
+            lblAccoutNumberValidation.Text = "*";
+            // 
+            // accountNameLabelValidation
+            // 
+            accountNameLabelValidation.AutoSize = true;
+            accountNameLabelValidation.ForeColor = Color.Red;
+            accountNameLabelValidation.Location = new Point(316, 377);
+            accountNameLabelValidation.Margin = new Padding(4, 0, 4, 0);
+            accountNameLabelValidation.Name = "accountNameLabelValidation";
+            accountNameLabelValidation.Size = new Size(12, 15);
+            accountNameLabelValidation.TabIndex = 21;
+            accountNameLabelValidation.Text = "*";
+            // 
             // ChartOfAccountsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(903, 555);
+            Controls.Add(accountNameLabelValidation);
+            Controls.Add(lblAccoutNumberValidation);
             Controls.Add(deleteButton);
             Controls.Add(updateButton);
             Controls.Add(addButton);
@@ -306,5 +334,7 @@
         private System.Windows.Forms.Button updateButton;
         private System.Windows.Forms.Button deleteButton;
         private System.Windows.Forms.ComboBox currencyComboBox;
+        private Label lblAccoutNumberValidation;
+        private Label accountNameLabelValidation;
     }
 }
