@@ -34,7 +34,7 @@ namespace AccountingSystem.UI
 
         private void chartOfAccountsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new ChartOfAccountsForm(_chartOfAccountService));
+            OpenForm(new ChartOfAccountsForm(_chartOfAccountService, _currencyService));
         }
 
         private void vATTaxToolStripMenuItem_Click(object sender, EventArgs e)

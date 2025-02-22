@@ -18,7 +18,7 @@ namespace AccountingSystem.DAL.Repositories
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.Query<ChartOfAccount>("SELECT * FROM ChartOfAccounts");
+                return connection.Query<ChartOfAccount>("SELECT * FROM ChartOfAccounts WHERE IsActive = 1");
             }
         }
 
@@ -34,7 +34,7 @@ namespace AccountingSystem.DAL.Repositories
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.Execute("INSERT INTO ChartOfAccounts (AccountNumber, AccountName, AccountType, AccountGroup, OpeningBalance) VALUES (@AccountNumber, @AccountName, @AccountType, @AccountGroup, @OpeningBalance); SELECT CAST(SCOPE_IDENTITY() as int)", account);
+                return connection.Execute("INSERT INTO ChartOfAccounts (AccountNumber, AccountName, AccountType, AccountGroup, OpeningBalance,CurrencyID,IsActive) VALUES (@AccountNumber, @AccountName, @AccountType, @AccountGroup, @OpeningBalance,@CurrencyID,@IsActive); SELECT CAST(SCOPE_IDENTITY() as int)", account);
             }
         }
 
@@ -42,7 +42,7 @@ namespace AccountingSystem.DAL.Repositories
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.Execute("UPDATE ChartOfAccounts SET AccountNumber = @AccountNumber, AccountName = @AccountName, AccountType = @AccountType, AccountGroup = @AccountGroup, OpeningBalance = @OpeningBalance WHERE AccountID = @AccountID", account);
+                return connection.Execute("UPDATE ChartOfAccounts SET AccountNumber = @AccountNumber, AccountName = @AccountName, AccountType = @AccountType, AccountGroup = @AccountGroup, OpeningBalance = @OpeningBalance,CurrencyID = @CurrencyID,IsActive = @IsActive WHERE AccountID = @AccountID", account);
             }
         }
 
@@ -50,7 +50,7 @@ namespace AccountingSystem.DAL.Repositories
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.Execute("DELETE FROM ChartOfAccounts WHERE AccountID = @AccountId", new { AccountId = accountId });
+                return connection.Execute("UPDATE ChartOfAccounts SET IsActive = 0 WHERE AccountID = @AccountId", new { AccountId = accountId });
             }
         }
     }
