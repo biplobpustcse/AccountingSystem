@@ -1,6 +1,6 @@
 ﻿using AccountingSystem.DAL.Repositories;
 using AccountingSystem.Models.Entities;
-using Microsoft.Identity.Client;
+using System.Data;
 
 namespace AccountingSystem.BLL
 {
@@ -11,10 +11,11 @@ namespace AccountingSystem.BLL
         {
             _repository = repository;
         }
+        public IDbConnection GetConnection() => _repository.GetConnection();
         public IEnumerable<Transaction> GetAllTransactions()=> _repository.GetAll();
         public Transaction GetTransactionById(int transactionId) => _repository.GetById(transactionId);
         public int InsertTransaction(Transaction transaction) => _repository.Insert(transaction);
         public int UpdateTransaction(Transaction transaction) => _repository.Update(transaction);
-        public int DeleteTransaction(int transactionId) => _repository.Delete(transactionId);
+        public void DeleteTransaction(int transactionId, IDbTransaction dbTransaction) => _repository.Delete(transactionId, dbTransaction);
     }
 }

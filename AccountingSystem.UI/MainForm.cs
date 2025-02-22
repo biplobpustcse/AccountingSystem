@@ -1,7 +1,4 @@
 using AccountingSystem.BLL;
-using AccountingSystem.UI.Operation;
-using System;
-using System.Windows.Forms;
 
 namespace AccountingSystem.UI
 {
@@ -12,6 +9,7 @@ namespace AccountingSystem.UI
         private readonly ITransactionDetailService _transactionDetailService;
         private readonly ICurrencyService _currencyService;
         private readonly IVATTaxService _vatTaxService;
+        private int _transactionId; 
 
         public MainForm(IChartOfAccountService chartOfAccountService,
             ITransactionService transactionService,
@@ -44,12 +42,12 @@ namespace AccountingSystem.UI
 
         private void transactionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new TransactionsForm(_transactionService));
+            OpenForm(new TransactionsForm(_transactionService, _transactionDetailService, _chartOfAccountService, _vatTaxService, _currencyService, this));
         }
 
         private void transactionDetailsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new TransactionDetailsForm(_transactionDetailService));
+            OpenForm(new TransactionDetailsForm(_transactionDetailService, _chartOfAccountService, _vatTaxService, _currencyService, _transactionId));
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -60,6 +58,11 @@ namespace AccountingSystem.UI
         private void OpenForm(Form form)
         {
             form.ShowDialog();
+        }
+        // Method to set the transaction ID from TransactionsForm
+        public void SetTransactionId(int transactionId)
+        {
+            _transactionId = transactionId;
         }
     }
 }

@@ -13,7 +13,10 @@ namespace AccountingSystem.DAL.Repositories
         {
             this.context = context;
         }
-
+        public IDbConnection GetConnection()
+        {
+            return context.CreateConnection();
+        }
         public IEnumerable<Transaction> GetAll()
         {
             using (var connection = context.CreateConnection())
@@ -34,7 +37,7 @@ namespace AccountingSystem.DAL.Repositories
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.Execute("INSERT INTO Transactions (TransactionDate, TransactionNumber, Description, Reference) VALUES (@TransactionDate, @TransactionNumber, @Description, @Reference); SELECT CAST(SCOPE_IDENTITY() as int)", transaction);
+                return connection.ExecuteScalar<int>("INSERT INTO Transactions (TransactionDate, TransactionNumber, Description, Reference) VALUES (@TransactionDate, @TransactionNumber, @Description, @Reference); SELECT CAST(SCOPE_IDENTITY() as int)", transaction);
             }
         }
 
@@ -46,11 +49,14 @@ namespace AccountingSystem.DAL.Repositories
             }
         }
 
-        public int Delete(int transactionId)
+        public void Delete(int transactionId, IDbTransaction transaction)
         {
-            using (var connection = context.CreateConnection())
+            using (var command = transaction.Connection.CreateCommand())
             {
-                return connection.Execute("DELETE FROM Transactions WHERE TransactionID = @TransactionId", new { TransactionId = transactionId });
+                command.Transaction = transaction;
+                command.CommandText = "DELETE FROM Transactions WHERE TransactionID = @TransactionID";
+                command.Parameters.Add(new SqlParameter("@TransactionID", transactionId));
+                command.ExecuteNonQuery();
             }
         }
     }

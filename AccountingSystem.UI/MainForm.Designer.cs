@@ -37,7 +37,6 @@
             operationToolStripMenuItem = new ToolStripMenuItem();
             chartOfAccountsToolStripMenuItem = new ToolStripMenuItem();
             transactionsToolStripMenuItem = new ToolStripMenuItem();
-            transactionDetailsToolStripMenuItem = new ToolStripMenuItem();
             lblWelcome = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -94,7 +93,7 @@
             // operationToolStripMenuItem
             // 
             operationToolStripMenuItem.BackColor = SystemColors.Window;
-            operationToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { chartOfAccountsToolStripMenuItem, transactionsToolStripMenuItem, transactionDetailsToolStripMenuItem });
+            operationToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { chartOfAccountsToolStripMenuItem, transactionsToolStripMenuItem });
             operationToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             operationToolStripMenuItem.Name = "operationToolStripMenuItem";
             operationToolStripMenuItem.Size = new Size(80, 20);
@@ -103,23 +102,16 @@
             // chartOfAccountsToolStripMenuItem
             // 
             chartOfAccountsToolStripMenuItem.Name = "chartOfAccountsToolStripMenuItem";
-            chartOfAccountsToolStripMenuItem.Size = new Size(178, 22);
+            chartOfAccountsToolStripMenuItem.Size = new Size(180, 22);
             chartOfAccountsToolStripMenuItem.Text = "Chart of Accounts";
             chartOfAccountsToolStripMenuItem.Click += chartOfAccountsToolStripMenuItem_Click;
             // 
             // transactionsToolStripMenuItem
             // 
             transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
-            transactionsToolStripMenuItem.Size = new Size(178, 22);
+            transactionsToolStripMenuItem.Size = new Size(180, 22);
             transactionsToolStripMenuItem.Text = "Transactions";
             transactionsToolStripMenuItem.Click += transactionsToolStripMenuItem_Click;
-            // 
-            // transactionDetailsToolStripMenuItem
-            // 
-            transactionDetailsToolStripMenuItem.Name = "transactionDetailsToolStripMenuItem";
-            transactionDetailsToolStripMenuItem.Size = new Size(178, 22);
-            transactionDetailsToolStripMenuItem.Text = "Transaction Details";
-            transactionDetailsToolStripMenuItem.Click += transactionDetailsToolStripMenuItem_Click;
             // 
             // lblWelcome
             // 
@@ -162,7 +154,6 @@
         private System.Windows.Forms.ToolStripMenuItem chartOfAccountsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem vATTaxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transactionsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem transactionDetailsToolStripMenuItem;
         private ToolStripMenuItem setupToolStripMenuItem;
         private Label lblWelcome;
     }

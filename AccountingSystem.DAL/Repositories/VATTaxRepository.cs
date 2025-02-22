@@ -1,7 +1,5 @@
 ﻿using AccountingSystem.Models.Entities;
 using Dapper;
-using Microsoft.Data.SqlClient;
-using System.Data;
 
 namespace AccountingSystem.DAL.Repositories
 {

@@ -13,7 +13,10 @@ namespace AccountingSystem.DAL.Repositories
         {
             this.context = context;
         }
-
+        public IDbConnection GetConnection()
+        {
+            return context.CreateConnection();
+        }
         public IEnumerable<TransactionDetail> GetAll()
         {
             using (var connection = context.CreateConnection())
@@ -29,12 +32,19 @@ namespace AccountingSystem.DAL.Repositories
                 return connection.QueryFirstOrDefault<TransactionDetail>("SELECT * FROM TransactionDetails WHERE DetailID = @DetailId", new { DetailId = detailId });
             }
         }
+        public IEnumerable<TransactionDetail> GetByTransactionId(int transactionId)
+        {
+            using (var connection = context.CreateConnection())
+            {
+                return connection.Query<TransactionDetail>("SELECT * FROM TransactionDetails WHERE TransactionID = @TransactionID", new { TransactionID = transactionId });
+            }
+        }
 
         public int Insert(TransactionDetail detail)
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.Execute("INSERT INTO TransactionDetails (TransactionID, DebitAccountID, CreditAccountID, Amount, VATID, VATAmount) VALUES (@TransactionID, @DebitAccountID, @CreditAccountID, @Amount, @VATID, @VATAmount); SELECT CAST(SCOPE_IDENTITY() as int)", detail);
+                return connection.Execute("INSERT INTO TransactionDetails (TransactionID, DebitAccountID, CreditAccountID, Amount, VATID, VATAmount,CurrencyID) VALUES (@TransactionID, @DebitAccountID, @CreditAccountID, @Amount, @VATID, @VATAmount,@CurrencyID); SELECT CAST(SCOPE_IDENTITY() as int)", detail);
             }
         }
 
@@ -42,15 +52,37 @@ namespace AccountingSystem.DAL.Repositories
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.Execute("UPDATE TransactionDetails SET TransactionID = @TransactionID, DebitAccountID = @DebitAccountID, CreditAccountID = @CreditAccountID, Amount = @Amount, VATID = @VATID, VATAmount = @VATAmount WHERE DetailID = @DetailID", detail);
+                return connection.Execute("UPDATE TransactionDetails SET TransactionID = @TransactionID, DebitAccountID = @DebitAccountID, CreditAccountID = @CreditAccountID, Amount = @Amount, VATID = @VATID, VATAmount = @VATAmount,CurrencyID = @CurrencyID WHERE DetailID = @DetailID", detail);
             }
         }
 
-        public int Delete(int detailId)
+        public void Delete(int detailId, IDbTransaction transaction)
         {
-            using (var connection = context.CreateConnection())
+            //using (var connection = context.CreateConnection())
+            //{
+            //    return connection.Execute("DELETE FROM TransactionDetails WHERE DetailID = @DetailId", new { DetailId = detailId });
+            //}
+
+            using (var command = transaction.Connection.CreateCommand())
             {
-                return connection.Execute("DELETE FROM TransactionDetails WHERE DetailID = @DetailId", new { DetailId = detailId });
+                command.Transaction = transaction;
+                command.CommandText = "DELETE FROM TransactionDetails WHERE DetailId = @DetailId";
+                command.Parameters.Add(new SqlParameter("@DetailId", detailId));
+                command.ExecuteNonQuery();
+            }
+        }
+        public void DeleteByTransactionId(int transactionId, IDbTransaction transaction)
+        {
+            //using (var connection = context.CreateConnection())
+            //{
+            //    return connection.Execute("DELETE FROM TransactionDetails WHERE TransactionId = @TransactionId", new { TransactionId = transactionId });
+            //}
+            using (var command = transaction.Connection.CreateCommand())
+            {
+                command.Transaction = transaction;
+                command.CommandText = "DELETE FROM TransactionDetails WHERE TransactionID = @TransactionID";
+                command.Parameters.Add(new SqlParameter("@TransactionID", transactionId));
+                command.ExecuteNonQuery();
             }
         }
     }
