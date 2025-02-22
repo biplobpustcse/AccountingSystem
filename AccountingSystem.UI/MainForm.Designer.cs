@@ -31,19 +31,20 @@
             menuStrip1 = new MenuStrip();
             closeToolStripMenuItem = new ToolStripMenuItem();
             exitToolStripMenuItem = new ToolStripMenuItem();
-            operationToolStripMenuItem = new ToolStripMenuItem();
+            setupToolStripMenuItem = new ToolStripMenuItem();
             currenciesToolStripMenuItem = new ToolStripMenuItem();
-            chartOfAccountsToolStripMenuItem = new ToolStripMenuItem();
             vATTaxToolStripMenuItem = new ToolStripMenuItem();
+            operationToolStripMenuItem = new ToolStripMenuItem();
+            chartOfAccountsToolStripMenuItem = new ToolStripMenuItem();
             transactionsToolStripMenuItem = new ToolStripMenuItem();
             transactionDetailsToolStripMenuItem = new ToolStripMenuItem();
-            setupToolStripMenuItem = new ToolStripMenuItem();
+            lblWelcome = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { closeToolStripMenuItem, setupToolStripMenuItem,operationToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { closeToolStripMenuItem, setupToolStripMenuItem, operationToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 2, 0, 2);
@@ -68,7 +69,7 @@
             exitToolStripMenuItem.Click += exitToolStripMenuItem_Click;
             // 
             // setupToolStripMenuItem
-            //
+            // 
             setupToolStripMenuItem.BackColor = SystemColors.Window;
             setupToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { currenciesToolStripMenuItem, vATTaxToolStripMenuItem });
             setupToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
@@ -79,14 +80,14 @@
             // currenciesToolStripMenuItem
             // 
             currenciesToolStripMenuItem.Name = "currenciesToolStripMenuItem";
-            currenciesToolStripMenuItem.Size = new Size(180, 22);
+            currenciesToolStripMenuItem.Size = new Size(133, 22);
             currenciesToolStripMenuItem.Text = "Currencies";
             currenciesToolStripMenuItem.Click += currenciesToolStripMenuItem_Click;
             // 
             // vATTaxToolStripMenuItem
             // 
             vATTaxToolStripMenuItem.Name = "vATTaxToolStripMenuItem";
-            vATTaxToolStripMenuItem.Size = new Size(180, 22);
+            vATTaxToolStripMenuItem.Size = new Size(133, 22);
             vATTaxToolStripMenuItem.Text = "VAT Tax";
             vATTaxToolStripMenuItem.Click += vATTaxToolStripMenuItem_Click;
             // 
@@ -102,23 +103,35 @@
             // chartOfAccountsToolStripMenuItem
             // 
             chartOfAccountsToolStripMenuItem.Name = "chartOfAccountsToolStripMenuItem";
-            chartOfAccountsToolStripMenuItem.Size = new Size(180, 22);
+            chartOfAccountsToolStripMenuItem.Size = new Size(178, 22);
             chartOfAccountsToolStripMenuItem.Text = "Chart of Accounts";
             chartOfAccountsToolStripMenuItem.Click += chartOfAccountsToolStripMenuItem_Click;
             // 
             // transactionsToolStripMenuItem
             // 
             transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
-            transactionsToolStripMenuItem.Size = new Size(180, 22);
+            transactionsToolStripMenuItem.Size = new Size(178, 22);
             transactionsToolStripMenuItem.Text = "Transactions";
             transactionsToolStripMenuItem.Click += transactionsToolStripMenuItem_Click;
             // 
             // transactionDetailsToolStripMenuItem
             // 
             transactionDetailsToolStripMenuItem.Name = "transactionDetailsToolStripMenuItem";
-            transactionDetailsToolStripMenuItem.Size = new Size(180, 22);
+            transactionDetailsToolStripMenuItem.Size = new Size(178, 22);
             transactionDetailsToolStripMenuItem.Text = "Transaction Details";
             transactionDetailsToolStripMenuItem.Click += transactionDetailsToolStripMenuItem_Click;
+            // 
+            // lblWelcome
+            // 
+            lblWelcome.AutoSize = true;
+            lblWelcome.BackColor = Color.Transparent;
+            lblWelcome.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            lblWelcome.ForeColor = Color.Green;
+            lblWelcome.Location = new Point(407, 235);
+            lblWelcome.Name = "lblWelcome";
+            lblWelcome.Size = new Size(82, 21);
+            lblWelcome.TabIndex = 1;
+            lblWelcome.Text = "Welcome";
             // 
             // MainForm
             // 
@@ -126,6 +139,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.Window;
             ClientSize = new Size(933, 519);
+            Controls.Add(lblWelcome);
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             MainMenuStrip = menuStrip1;
@@ -150,5 +164,6 @@
         private System.Windows.Forms.ToolStripMenuItem transactionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem transactionDetailsToolStripMenuItem;
         private ToolStripMenuItem setupToolStripMenuItem;
+        private Label lblWelcome;
     }
 }

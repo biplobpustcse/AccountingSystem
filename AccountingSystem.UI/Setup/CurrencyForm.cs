@@ -32,6 +32,11 @@ namespace AccountingSystem.UI
         {
             try
             {
+                if (string.IsNullOrEmpty(currencyCodeTextBox.Text))
+                {
+                    MessageBox.Show("Ccurrency Code is required.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 Currency currency = new Currency
                 {
                     CurrencyCode = currencyCodeTextBox.Text,
