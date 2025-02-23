@@ -10,6 +10,6 @@ namespace AccountingSystem.BLL
         public Transaction GetTransactionById(int transactionId);
         public int InsertTransaction(Transaction transaction);
         public int UpdateTransaction(Transaction transaction);
-        public void DeleteTransaction(int transactionId,IDbTransaction transaction);
+        public void DeleteTransaction(int transactionId);
     }
 }

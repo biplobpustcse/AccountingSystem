@@ -13,10 +13,12 @@ namespace AccountingSystem.DAL.Repositories
         {
             this.context = context;
         }
+
         public IDbConnection GetConnection()
         {
             return context.CreateConnection();
         }
+
         public IEnumerable<Transaction> GetAll()
         {
             using (var connection = context.CreateConnection())
@@ -37,7 +39,15 @@ namespace AccountingSystem.DAL.Repositories
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.ExecuteScalar<int>("INSERT INTO Transactions (TransactionDate, TransactionNumber, Description, Reference) VALUES (@TransactionDate, @TransactionNumber, @Description, @Reference); SELECT CAST(SCOPE_IDENTITY() as int)", transaction);
+                return connection.ExecuteScalar<int>(@"
+                    INSERT INTO Transactions (
+                        TransactionDate, TransactionNumber, Description, Reference, 
+                        DebitAccountID, CreditAccountID, Amount, VATID, VATAmount, CurrencyID
+                    ) VALUES (
+                        @TransactionDate, @TransactionNumber, @Description, @Reference, 
+                        @DebitAccountID, @CreditAccountID, @Amount, @VATID, @VATAmount, @CurrencyID
+                    );
+                    SELECT CAST(SCOPE_IDENTITY() as int)", transaction);
             }
         }
 
@@ -45,18 +55,27 @@ namespace AccountingSystem.DAL.Repositories
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.Execute("UPDATE Transactions SET TransactionDate = @TransactionDate, TransactionNumber = @TransactionNumber, Description = @Description, Reference = @Reference WHERE TransactionID = @TransactionID", transaction);
+                return connection.Execute(@"
+                    UPDATE Transactions SET 
+                        TransactionDate = @TransactionDate, 
+                        TransactionNumber = @TransactionNumber, 
+                        Description = @Description, 
+                        Reference = @Reference,
+                        DebitAccountID = @DebitAccountID,
+                        CreditAccountID = @CreditAccountID,
+                        Amount = @Amount,
+                        VATID = @VATID,
+                        VATAmount = @VATAmount,
+                        CurrencyID = @CurrencyID
+                    WHERE TransactionID = @TransactionID", transaction);
             }
         }
 
-        public void Delete(int transactionId, IDbTransaction transaction)
+        public void Delete(int transactionId)
         {
-            using (var command = transaction.Connection.CreateCommand())
+            using (var connection = context.CreateConnection())
             {
-                command.Transaction = transaction;
-                command.CommandText = "DELETE FROM Transactions WHERE TransactionID = @TransactionID";
-                command.Parameters.Add(new SqlParameter("@TransactionID", transactionId));
-                command.ExecuteNonQuery();
+                connection.Execute("DELETE FROM Transactions WHERE TransactionID = @TransactionID", new { TransactionID = transactionId });
             }
         }
     }

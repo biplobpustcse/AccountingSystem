@@ -42,7 +42,7 @@ namespace AccountingSystem.UI
 
         private void transactionsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            OpenForm(new TransactionsForm(_transactionService, _transactionDetailService, _chartOfAccountService, _vatTaxService, _currencyService, this));
+            OpenForm(new TransactionsForm(_transactionService, _chartOfAccountService, _vatTaxService, _currencyService));
         }
 
         private void transactionDetailsToolStripMenuItem_Click(object sender, EventArgs e)

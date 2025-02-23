@@ -1,28 +1,27 @@
-﻿using AccountingSystem.BLL;
-using AccountingSystem.Models.Entities;
+﻿using AccountingSystem.Models.Entities;
+using AccountingSystem.DAL.Repositories;
+using AccountingSystem.BLL;
 
 namespace AccountingSystem.UI
 {
     public partial class TransactionsForm : Form
     {
-        private readonly ITransactionService _transactionService;
-        private readonly ITransactionDetailService _transactionDetailService;
         private readonly IChartOfAccountService _chartOfAccountService;
-        private readonly IVATTaxService _vatTaxService;
+        private readonly ITransactionService _transactionService;
         private readonly ICurrencyService _currencyService;
-        private MainForm _mainForm; // Add a field to store a reference to MainForm
+        private readonly IVATTaxService _vatTaxService;
         private int transactionCounter = 1;
 
-        public TransactionsForm(ITransactionService transactionService, ITransactionDetailService transactionDetailService, IChartOfAccountService chartOfAccountService, IVATTaxService vatTaxService, ICurrencyService currencyService, MainForm mainForm)
+        public TransactionsForm(ITransactionService transactionService, IChartOfAccountService chartOfAccountService, IVATTaxService vatTaxService, ICurrencyService currencyService)
         {
             InitializeComponent();
             _transactionService = transactionService;
-            _transactionDetailService = transactionDetailService;
             _chartOfAccountService = chartOfAccountService;
             _vatTaxService = vatTaxService;
             _currencyService = currencyService;
-            _mainForm = mainForm;
+
             LoadTransactions();
+            LoadComboBoxes();
         }
 
         private void LoadTransactions()
@@ -30,7 +29,7 @@ namespace AccountingSystem.UI
             try
             {
                 transactionsDataGridView.DataSource = _transactionService.GetAllTransactions();
-                GenerateTransactionNumber();
+                transactionNumberTextBox.Text = GenerateTransactionNumber();
             }
             catch (Exception ex)
             {
@@ -38,113 +37,38 @@ namespace AccountingSystem.UI
             }
         }
 
-        private void addButton_Click(object sender, EventArgs e)
+        private void LoadComboBoxes()
         {
-            try
-            {
-                Transaction transaction = new Transaction
-                {
-                    TransactionDate = transactionDateDateTimePicker.Value.Date,
-                    TransactionNumber = transactionNumberTextBox.Text,
-                    Description = descriptionTextBox.Text,
-                    Reference = referenceTextBox.Text
-                };
+            debitAccountComboBox.DataSource = _chartOfAccountService.GetAllChartOfAccounts().ToList();
+            debitAccountComboBox.DisplayMember = "AccountName";
+            debitAccountComboBox.ValueMember = "AccountID";
 
-                transaction.TransactionID = _transactionService.InsertTransaction(transaction);
-                LoadTransactions();
-                ClearInputFields();
+            creditAccountComboBox.DataSource = _chartOfAccountService.GetAllChartOfAccounts().ToList();
+            creditAccountComboBox.DisplayMember = "AccountName";
+            creditAccountComboBox.ValueMember = "AccountID";
 
-                // Pass the transaction ID back to MainForm
-                _mainForm.SetTransactionId(transaction.TransactionID);
-                // Open Transaction Details Form
-                TransactionDetailsForm detailsForm = new TransactionDetailsForm(_transactionDetailService, _chartOfAccountService, _vatTaxService, _currencyService, transaction.TransactionID);
-                detailsForm.ShowDialog();
+            vatComboBox.DataSource = _vatTaxService.GetAllVATTaxs().ToList();
+            vatComboBox.DisplayMember = "VATRate";
+            vatComboBox.ValueMember = "VATID";
+            vatComboBox.SelectedIndex = -1;
 
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error adding transaction: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            currencyComboBox.DataSource = _currencyService.GetAllCurrencys().ToList();
+            currencyComboBox.DisplayMember = "CurrencyCode";
+            currencyComboBox.ValueMember = "CurrencyID";
         }
 
-        private void updateButton_Click(object sender, EventArgs e)
+        private void ClearForm()
         {
-            if (string.IsNullOrEmpty(transactionIdTextBox.Text))
-            {
-                MessageBox.Show("Please select a transaction to update.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                Transaction transaction = new Transaction
-                {
-                    TransactionID = int.Parse(transactionIdTextBox.Text),
-                    TransactionDate = transactionDateDateTimePicker.Value.Date,
-                    TransactionNumber = transactionNumberTextBox.Text,
-                    Description = descriptionTextBox.Text,
-                    Reference = referenceTextBox.Text
-                };
-
-                _transactionService.UpdateTransaction(transaction);
-                LoadTransactions();
-                ClearInputFields();
-
-                // Pass the transaction ID back to MainForm
-                _mainForm.SetTransactionId(transaction.TransactionID);
-                // Open Transaction Details Form
-                TransactionDetailsForm detailsForm = new TransactionDetailsForm(_transactionDetailService, _chartOfAccountService, _vatTaxService, _currencyService, transaction.TransactionID);
-                detailsForm.ShowDialog();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error updating transaction: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void deleteButton_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(transactionIdTextBox.Text))
-            {
-                MessageBox.Show("Please select a transaction to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            try
-            {
-                int transactionId = int.Parse(transactionIdTextBox.Text);
-
-                using (var connection = _transactionService.GetConnection()) // Get a connection
-                {
-                    connection.Open();
-                    using (var transaction = connection.BeginTransaction()) // Begin a transaction
-                    {
-                        try
-                        {
-                            _transactionDetailService.DeleteTransactionDetail(transactionId, transaction);
-                            _transactionService.DeleteTransaction(transactionId, transaction);
-
-                            transaction.Commit(); // Commit the transaction
-                            LoadTransactions();
-                            ClearInputFields();
-                        }
-                        catch (Exception ex)
-                        {
-                            transaction.Rollback(); // Rollback on error
-                            MessageBox.Show($"Error deleting transaction: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-
-                //_transactionService.DeleteTransaction(transactionId);
-                //_transactionDetailService.DeleteTransactionDetail(transactionId);
-                LoadTransactions();
-                ClearInputFields();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error deleting transaction: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            transactionIdTextBox.Text = "";
+            transactionDateDateTimePicker.Value = DateTime.Now;
+            transactionNumberTextBox.Text = "";
+            descriptionTextBox.Text = "";
+            referenceTextBox.Text = "";
+            debitAccountComboBox.SelectedIndex = -1;
+            creditAccountComboBox.SelectedIndex = -1;
+            amountNumericUpDown.Value = 0;
+            vatComboBox.SelectedIndex = -1;
+            currencyComboBox.SelectedIndex = -1;
         }
 
         private void transactionsDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -157,23 +81,112 @@ namespace AccountingSystem.UI
                 transactionNumberTextBox.Text = row.Cells["TransactionNumber"].Value.ToString();
                 descriptionTextBox.Text = row.Cells["Description"].Value.ToString();
                 referenceTextBox.Text = row.Cells["Reference"].Value.ToString();
+
+                debitAccountComboBox.SelectedValue = row.Cells["DebitAccountID"].Value;
+                creditAccountComboBox.SelectedValue = row.Cells["CreditAccountID"].Value;
+                amountNumericUpDown.Value = Convert.ToDecimal(row.Cells["Amount"].Value);
+
+                if (row.Cells["VATID"].Value != DBNull.Value)
+                {
+                    vatComboBox.SelectedValue = row.Cells["VATID"].Value;
+                }
+                else
+                {
+                    vatComboBox.SelectedIndex = -1;
+                }
+
+                currencyComboBox.SelectedValue = row.Cells["CurrencyID"].Value;
             }
         }
-        private void GenerateTransactionNumber()
+
+        private void addButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Transaction transaction = new Transaction
+                {
+                    TransactionDate = transactionDateDateTimePicker.Value,
+                    TransactionNumber = transactionNumberTextBox.Text,
+                    Description = descriptionTextBox.Text,
+                    Reference = referenceTextBox.Text,
+                    DebitAccountID = (int)debitAccountComboBox.SelectedValue,
+                    CreditAccountID = (int)creditAccountComboBox.SelectedValue,
+                    Amount = amountNumericUpDown.Value,
+                    VATID = vatComboBox.SelectedValue != null ? (int?)vatComboBox.SelectedValue : null,
+                    CurrencyID = (int)currencyComboBox.SelectedValue
+                };
+
+                _transactionService.InsertTransaction(transaction);
+                ClearForm();
+                LoadTransactions();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error adding transaction: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void updateButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(transactionIdTextBox.Text))
+                {
+                    MessageBox.Show("Please select a transaction to update.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                Transaction transaction = new Transaction
+                {
+                    TransactionID = int.Parse(transactionIdTextBox.Text),
+                    TransactionDate = transactionDateDateTimePicker.Value,
+                    TransactionNumber = transactionNumberTextBox.Text,
+                    Description = descriptionTextBox.Text,
+                    Reference = referenceTextBox.Text,
+                    DebitAccountID = (int)debitAccountComboBox.SelectedValue,
+                    CreditAccountID = (int)creditAccountComboBox.SelectedValue,
+                    Amount = amountNumericUpDown.Value,
+                    VATID = vatComboBox.SelectedValue != null ? (int?)vatComboBox.SelectedValue : null,
+                    CurrencyID = (int)currencyComboBox.SelectedValue
+                };
+
+                _transactionService.UpdateTransaction(transaction);
+                ClearForm();
+                LoadTransactions();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error updating transaction: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void deleteButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (string.IsNullOrEmpty(transactionIdTextBox.Text))
+                {
+                    MessageBox.Show("Please select a transaction to delete.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                int transactionId = int.Parse(transactionIdTextBox.Text);
+                _transactionService.DeleteTransaction(transactionId);
+                ClearForm();
+                LoadTransactions();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error deleting transaction: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private string GenerateTransactionNumber()
         {
             string datePart = DateTime.Now.ToString("yyyyMMdd");
             string counterPart = transactionCounter.ToString("D5"); // 5 digits
             transactionCounter++;
-            transactionNumberTextBox.Text = $"TXN-{datePart}-{counterPart}";
-        }
-
-        private void ClearInputFields()
-        {
-            transactionIdTextBox.Clear();
-            transactionDateDateTimePicker.Value = DateTime.Now;
-            transactionNumberTextBox.Clear();
-            descriptionTextBox.Clear();
-            referenceTextBox.Clear();
+            return $"TXN-{datePart}-{counterPart}";
         }
     }
 }

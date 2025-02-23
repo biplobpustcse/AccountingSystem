@@ -16,6 +16,6 @@ namespace AccountingSystem.BLL
         public Transaction GetTransactionById(int transactionId) => _repository.GetById(transactionId);
         public int InsertTransaction(Transaction transaction) => _repository.Insert(transaction);
         public int UpdateTransaction(Transaction transaction) => _repository.Update(transaction);
-        public void DeleteTransaction(int transactionId, IDbTransaction dbTransaction) => _repository.Delete(transactionId, dbTransaction);
+        public void DeleteTransaction(int transactionId) => _repository.Delete(transactionId);
     }
 }
