@@ -217,7 +217,7 @@
             // 
             // addButton
             // 
-            addButton.Location = new Point(13, 615);
+            addButton.Location = new Point(140, 615);
             addButton.Margin = new Padding(4, 3, 4, 3);
             addButton.Name = "addButton";
             addButton.Size = new Size(88, 27);
@@ -228,7 +228,7 @@
             // 
             // updateButton
             // 
-            updateButton.Location = new Point(109, 615);
+            updateButton.Location = new Point(236, 615);
             updateButton.Margin = new Padding(4, 3, 4, 3);
             updateButton.Name = "updateButton";
             updateButton.Size = new Size(88, 27);
@@ -239,7 +239,7 @@
             // 
             // deleteButton
             // 
-            deleteButton.Location = new Point(205, 615);
+            deleteButton.Location = new Point(332, 615);
             deleteButton.Margin = new Padding(4, 3, 4, 3);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(88, 27);

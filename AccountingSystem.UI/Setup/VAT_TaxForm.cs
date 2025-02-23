@@ -14,6 +14,10 @@ namespace AccountingSystem.UI
             InitializeComponent();
             _vatTaxService = vatTaxService;
             LoadVATTaxes();
+
+            addButton.Enabled = true;
+            updateButton.Enabled = false;
+            deleteButton.Enabled = false;
         }
 
         private void LoadVATTaxes()
@@ -66,6 +70,10 @@ namespace AccountingSystem.UI
                 _vatTaxService.UpdateVATTax(vatTax);
                 LoadVATTaxes();
                 ClearInputFields();
+
+                addButton.Enabled = true;
+                updateButton.Enabled = false;
+                deleteButton.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -87,6 +95,10 @@ namespace AccountingSystem.UI
                 _vatTaxService.DeleteVATTax(vatId);
                 LoadVATTaxes();
                 ClearInputFields();
+
+                addButton.Enabled = true;
+                updateButton.Enabled = false;
+                deleteButton.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -102,6 +114,10 @@ namespace AccountingSystem.UI
                 vatIdTextBox.Text = row.Cells["VATID"].Value.ToString();
                 vatRateNumericUpDown.Value = Convert.ToDecimal(row.Cells["VATRate"].Value);
                 effectiveDateTimePicker.Value = Convert.ToDateTime(row.Cells["EffectiveDate"].Value);
+
+                addButton.Enabled = false;
+                updateButton.Enabled = true;
+                deleteButton.Enabled = true;
             }
         }
 

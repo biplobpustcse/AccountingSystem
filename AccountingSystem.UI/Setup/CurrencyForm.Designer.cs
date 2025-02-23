@@ -56,7 +56,7 @@
             // currencyCodeLabel
             // 
             currencyCodeLabel.AutoSize = true;
-            currencyCodeLabel.Location = new Point(14, 348);
+            currencyCodeLabel.Location = new Point(13, 410);
             currencyCodeLabel.Margin = new Padding(4, 0, 4, 0);
             currencyCodeLabel.Name = "currencyCodeLabel";
             currencyCodeLabel.Size = new Size(89, 15);
@@ -66,7 +66,7 @@
             // exchangeRateLabel
             // 
             exchangeRateLabel.AutoSize = true;
-            exchangeRateLabel.Location = new Point(14, 383);
+            exchangeRateLabel.Location = new Point(15, 379);
             exchangeRateLabel.Margin = new Padding(4, 0, 4, 0);
             exchangeRateLabel.Name = "exchangeRateLabel";
             exchangeRateLabel.Size = new Size(87, 15);
@@ -75,7 +75,7 @@
             // 
             // currencyCodeTextBox
             // 
-            currencyCodeTextBox.Location = new Point(117, 345);
+            currencyCodeTextBox.Location = new Point(117, 410);
             currencyCodeTextBox.Margin = new Padding(4, 3, 4, 3);
             currencyCodeTextBox.Name = "currencyCodeTextBox";
             currencyCodeTextBox.Size = new Size(139, 23);
@@ -93,7 +93,7 @@
             // 
             // addButton
             // 
-            addButton.Location = new Point(292, 345);
+            addButton.Location = new Point(117, 454);
             addButton.Margin = new Padding(4, 3, 4, 3);
             addButton.Name = "addButton";
             addButton.Size = new Size(88, 27);
@@ -104,7 +104,7 @@
             // 
             // updateButton
             // 
-            updateButton.Location = new Point(391, 345);
+            updateButton.Location = new Point(216, 454);
             updateButton.Margin = new Padding(4, 3, 4, 3);
             updateButton.Name = "updateButton";
             updateButton.Size = new Size(88, 27);
@@ -115,7 +115,7 @@
             // 
             // deleteButton
             // 
-            deleteButton.Location = new Point(490, 345);
+            deleteButton.Location = new Point(315, 454);
             deleteButton.Margin = new Padding(4, 3, 4, 3);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(88, 27);
@@ -127,7 +127,7 @@
             // currencyIdLabel
             // 
             currencyIdLabel.AutoSize = true;
-            currencyIdLabel.Location = new Point(14, 418);
+            currencyIdLabel.Location = new Point(30, 346);
             currencyIdLabel.Margin = new Padding(4, 0, 4, 0);
             currencyIdLabel.Name = "currencyIdLabel";
             currencyIdLabel.Size = new Size(72, 15);
@@ -137,7 +137,7 @@
             // currencyIdTextBox
             // 
             currencyIdTextBox.Enabled = false;
-            currencyIdTextBox.Location = new Point(117, 414);
+            currencyIdTextBox.Location = new Point(117, 346);
             currencyIdTextBox.Margin = new Padding(4, 3, 4, 3);
             currencyIdTextBox.Name = "currencyIdTextBox";
             currencyIdTextBox.Size = new Size(139, 23);
@@ -158,7 +158,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(670, 454);
+            ClientSize = new Size(670, 514);
             Controls.Add(lblCurrencyList);
             Controls.Add(currencyIdTextBox);
             Controls.Add(currencyIdLabel);

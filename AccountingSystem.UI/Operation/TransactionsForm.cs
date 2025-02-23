@@ -22,6 +22,10 @@ namespace AccountingSystem.UI
 
             LoadTransactions();
             LoadComboBoxes();
+
+            addButton.Enabled = true;
+            updateButton.Enabled = false;
+            deleteButton.Enabled = false;
         }
 
         private void LoadTransactions()
@@ -96,6 +100,10 @@ namespace AccountingSystem.UI
                 }
 
                 currencyComboBox.SelectedValue = row.Cells["CurrencyID"].Value;
+
+                addButton.Enabled = false;
+                updateButton.Enabled = true;
+                deleteButton.Enabled = true;
             }
         }
 
@@ -153,6 +161,10 @@ namespace AccountingSystem.UI
                 _transactionService.UpdateTransaction(transaction);
                 ClearForm();
                 LoadTransactions();
+
+                addButton.Enabled = true;
+                updateButton.Enabled = false;
+                deleteButton.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -174,6 +186,10 @@ namespace AccountingSystem.UI
                 _transactionService.DeleteTransaction(transactionId);
                 ClearForm();
                 LoadTransactions();
+
+                addButton.Enabled = true;
+                updateButton.Enabled = false;
+                deleteButton.Enabled = false;
             }
             catch (Exception ex)
             {

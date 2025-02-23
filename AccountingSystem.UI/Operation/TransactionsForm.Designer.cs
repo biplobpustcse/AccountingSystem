@@ -52,6 +52,8 @@
             vatComboBox = new ComboBox();
             currencyLabel = new Label();
             currencyComboBox = new ComboBox();
+            lblTransactionList = new Label();
+            lblTransactionInfo = new Label();
             ((System.ComponentModel.ISupportInitialize)transactionsDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)amountNumericUpDown).BeginInit();
             SuspendLayout();
@@ -59,7 +61,7 @@
             // transactionsDataGridView
             // 
             transactionsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            transactionsDataGridView.Location = new Point(14, 14);
+            transactionsDataGridView.Location = new Point(14, 40);
             transactionsDataGridView.Margin = new Padding(4, 3, 4, 3);
             transactionsDataGridView.Name = "transactionsDataGridView";
             transactionsDataGridView.Size = new Size(905, 288);
@@ -69,7 +71,7 @@
             // transactionDateLabel
             // 
             transactionDateLabel.AutoSize = true;
-            transactionDateLabel.Location = new Point(14, 346);
+            transactionDateLabel.Location = new Point(14, 396);
             transactionDateLabel.Margin = new Padding(4, 0, 4, 0);
             transactionDateLabel.Name = "transactionDateLabel";
             transactionDateLabel.Size = new Size(97, 15);
@@ -79,7 +81,7 @@
             // transactionNumberLabel
             // 
             transactionNumberLabel.AutoSize = true;
-            transactionNumberLabel.Location = new Point(14, 381);
+            transactionNumberLabel.Location = new Point(14, 431);
             transactionNumberLabel.Margin = new Padding(4, 0, 4, 0);
             transactionNumberLabel.Name = "transactionNumberLabel";
             transactionNumberLabel.Size = new Size(117, 15);
@@ -89,7 +91,7 @@
             // descriptionLabel
             // 
             descriptionLabel.AutoSize = true;
-            descriptionLabel.Location = new Point(14, 415);
+            descriptionLabel.Location = new Point(14, 465);
             descriptionLabel.Margin = new Padding(4, 0, 4, 0);
             descriptionLabel.Name = "descriptionLabel";
             descriptionLabel.Size = new Size(70, 15);
@@ -99,7 +101,7 @@
             // referenceLabel
             // 
             referenceLabel.AutoSize = true;
-            referenceLabel.Location = new Point(14, 450);
+            referenceLabel.Location = new Point(14, 500);
             referenceLabel.Margin = new Padding(4, 0, 4, 0);
             referenceLabel.Name = "referenceLabel";
             referenceLabel.Size = new Size(62, 15);
@@ -108,7 +110,7 @@
             // 
             // transactionDateDateTimePicker
             // 
-            transactionDateDateTimePicker.Location = new Point(152, 343);
+            transactionDateDateTimePicker.Location = new Point(152, 422);
             transactionDateDateTimePicker.Margin = new Padding(4, 3, 4, 3);
             transactionDateDateTimePicker.Name = "transactionDateDateTimePicker";
             transactionDateDateTimePicker.Size = new Size(233, 23);
@@ -116,7 +118,7 @@
             // 
             // transactionNumberTextBox
             // 
-            transactionNumberTextBox.Location = new Point(152, 377);
+            transactionNumberTextBox.Location = new Point(152, 456);
             transactionNumberTextBox.Margin = new Padding(4, 3, 4, 3);
             transactionNumberTextBox.Name = "transactionNumberTextBox";
             transactionNumberTextBox.ReadOnly = true;
@@ -125,7 +127,7 @@
             // 
             // descriptionTextBox
             // 
-            descriptionTextBox.Location = new Point(152, 412);
+            descriptionTextBox.Location = new Point(152, 491);
             descriptionTextBox.Margin = new Padding(4, 3, 4, 3);
             descriptionTextBox.Name = "descriptionTextBox";
             descriptionTextBox.Size = new Size(233, 23);
@@ -133,7 +135,7 @@
             // 
             // referenceTextBox
             // 
-            referenceTextBox.Location = new Point(152, 447);
+            referenceTextBox.Location = new Point(152, 526);
             referenceTextBox.Margin = new Padding(4, 3, 4, 3);
             referenceTextBox.Name = "referenceTextBox";
             referenceTextBox.Size = new Size(233, 23);
@@ -141,7 +143,7 @@
             // 
             // addButton
             // 
-            addButton.Location = new Point(152, 667);
+            addButton.Location = new Point(152, 734);
             addButton.Margin = new Padding(4, 3, 4, 3);
             addButton.Name = "addButton";
             addButton.Size = new Size(88, 27);
@@ -152,7 +154,7 @@
             // 
             // updateButton
             // 
-            updateButton.Location = new Point(248, 667);
+            updateButton.Location = new Point(248, 734);
             updateButton.Margin = new Padding(4, 3, 4, 3);
             updateButton.Name = "updateButton";
             updateButton.Size = new Size(88, 27);
@@ -163,7 +165,7 @@
             // 
             // deleteButton
             // 
-            deleteButton.Location = new Point(344, 667);
+            deleteButton.Location = new Point(344, 734);
             deleteButton.Margin = new Padding(4, 3, 4, 3);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(88, 27);
@@ -175,7 +177,7 @@
             // transactionIdLabel
             // 
             transactionIdLabel.AutoSize = true;
-            transactionIdLabel.Location = new Point(14, 317);
+            transactionIdLabel.Location = new Point(14, 367);
             transactionIdLabel.Margin = new Padding(4, 0, 4, 0);
             transactionIdLabel.Name = "transactionIdLabel";
             transactionIdLabel.Size = new Size(84, 15);
@@ -185,7 +187,7 @@
             // transactionIdTextBox
             // 
             transactionIdTextBox.Enabled = false;
-            transactionIdTextBox.Location = new Point(152, 314);
+            transactionIdTextBox.Location = new Point(152, 393);
             transactionIdTextBox.Margin = new Padding(4, 3, 4, 3);
             transactionIdTextBox.Name = "transactionIdTextBox";
             transactionIdTextBox.Size = new Size(233, 23);
@@ -194,7 +196,7 @@
             // debitAccountLabel
             // 
             debitAccountLabel.AutoSize = true;
-            debitAccountLabel.Location = new Point(14, 484);
+            debitAccountLabel.Location = new Point(14, 534);
             debitAccountLabel.Margin = new Padding(4, 0, 4, 0);
             debitAccountLabel.Name = "debitAccountLabel";
             debitAccountLabel.Size = new Size(86, 15);
@@ -204,7 +206,7 @@
             // creditAccountLabel
             // 
             creditAccountLabel.AutoSize = true;
-            creditAccountLabel.Location = new Point(14, 519);
+            creditAccountLabel.Location = new Point(14, 569);
             creditAccountLabel.Margin = new Padding(4, 0, 4, 0);
             creditAccountLabel.Name = "creditAccountLabel";
             creditAccountLabel.Size = new Size(90, 15);
@@ -214,7 +216,7 @@
             // amountLabel
             // 
             amountLabel.AutoSize = true;
-            amountLabel.Location = new Point(14, 554);
+            amountLabel.Location = new Point(14, 604);
             amountLabel.Margin = new Padding(4, 0, 4, 0);
             amountLabel.Name = "amountLabel";
             amountLabel.Size = new Size(54, 15);
@@ -224,7 +226,7 @@
             // vatLabel
             // 
             vatLabel.AutoSize = true;
-            vatLabel.Location = new Point(14, 589);
+            vatLabel.Location = new Point(14, 639);
             vatLabel.Margin = new Padding(4, 0, 4, 0);
             vatLabel.Name = "vatLabel";
             vatLabel.Size = new Size(29, 15);
@@ -234,7 +236,7 @@
             // amountNumericUpDown
             // 
             amountNumericUpDown.DecimalPlaces = 2;
-            amountNumericUpDown.Location = new Point(152, 551);
+            amountNumericUpDown.Location = new Point(152, 630);
             amountNumericUpDown.Margin = new Padding(4, 3, 4, 3);
             amountNumericUpDown.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
             amountNumericUpDown.Name = "amountNumericUpDown";
@@ -245,7 +247,7 @@
             // 
             debitAccountComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             debitAccountComboBox.FormattingEnabled = true;
-            debitAccountComboBox.Location = new Point(152, 481);
+            debitAccountComboBox.Location = new Point(152, 560);
             debitAccountComboBox.Margin = new Padding(4, 3, 4, 3);
             debitAccountComboBox.Name = "debitAccountComboBox";
             debitAccountComboBox.Size = new Size(233, 23);
@@ -255,7 +257,7 @@
             // 
             creditAccountComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             creditAccountComboBox.FormattingEnabled = true;
-            creditAccountComboBox.Location = new Point(152, 516);
+            creditAccountComboBox.Location = new Point(152, 595);
             creditAccountComboBox.Margin = new Padding(4, 3, 4, 3);
             creditAccountComboBox.Name = "creditAccountComboBox";
             creditAccountComboBox.Size = new Size(233, 23);
@@ -265,7 +267,7 @@
             // 
             vatComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             vatComboBox.FormattingEnabled = true;
-            vatComboBox.Location = new Point(152, 586);
+            vatComboBox.Location = new Point(152, 665);
             vatComboBox.Margin = new Padding(4, 3, 4, 3);
             vatComboBox.Name = "vatComboBox";
             vatComboBox.Size = new Size(233, 23);
@@ -274,7 +276,7 @@
             // currencyLabel
             // 
             currencyLabel.AutoSize = true;
-            currencyLabel.Location = new Point(14, 624);
+            currencyLabel.Location = new Point(14, 674);
             currencyLabel.Margin = new Padding(4, 0, 4, 0);
             currencyLabel.Name = "currencyLabel";
             currencyLabel.Size = new Size(58, 15);
@@ -285,17 +287,41 @@
             // 
             currencyComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             currencyComboBox.FormattingEnabled = true;
-            currencyComboBox.Location = new Point(152, 621);
+            currencyComboBox.Location = new Point(152, 700);
             currencyComboBox.Margin = new Padding(4, 3, 4, 3);
             currencyComboBox.Name = "currencyComboBox";
             currencyComboBox.Size = new Size(233, 23);
             currencyComboBox.TabIndex = 23;
             // 
+            // lblTransactionList
+            // 
+            lblTransactionList.AutoSize = true;
+            lblTransactionList.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblTransactionList.Location = new Point(14, 9);
+            lblTransactionList.Margin = new Padding(4, 0, 4, 0);
+            lblTransactionList.Name = "lblTransactionList";
+            lblTransactionList.Size = new Size(115, 19);
+            lblTransactionList.TabIndex = 24;
+            lblTransactionList.Text = "Transaction List:";
+            // 
+            // lblTransactionInfo
+            // 
+            lblTransactionInfo.AutoSize = true;
+            lblTransactionInfo.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblTransactionInfo.Location = new Point(13, 334);
+            lblTransactionInfo.Margin = new Padding(4, 0, 4, 0);
+            lblTransactionInfo.Name = "lblTransactionInfo";
+            lblTransactionInfo.Size = new Size(119, 19);
+            lblTransactionInfo.TabIndex = 25;
+            lblTransactionInfo.Text = "Transaction Info:";
+            // 
             // TransactionsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(933, 730);
+            ClientSize = new Size(933, 782);
+            Controls.Add(lblTransactionInfo);
+            Controls.Add(lblTransactionList);
             Controls.Add(currencyComboBox);
             Controls.Add(currencyLabel);
             Controls.Add(vatComboBox);
@@ -355,5 +381,7 @@
         private System.Windows.Forms.ComboBox vatComboBox;
         private System.Windows.Forms.Label currencyLabel;
         private System.Windows.Forms.ComboBox currencyComboBox;
+        private Label lblTransactionList;
+        private Label lblTransactionInfo;
     }
 }

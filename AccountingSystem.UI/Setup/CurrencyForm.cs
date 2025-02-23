@@ -14,6 +14,10 @@ namespace AccountingSystem.UI
             InitializeComponent();
             _currencyService = currencyService;
             LoadCurrencies();
+
+            addButton.Enabled = true;
+            updateButton.Enabled = false;
+            deleteButton.Enabled = false;
         }
 
         private void LoadCurrencies()
@@ -71,6 +75,10 @@ namespace AccountingSystem.UI
                 _currencyService.UpdateCurrency(currency);
                 LoadCurrencies();
                 ClearInputFields();
+
+                addButton.Enabled = true;
+                updateButton.Enabled = false;
+                deleteButton.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -92,6 +100,10 @@ namespace AccountingSystem.UI
                 _currencyService.DeleteCurrency(currencyId);
                 LoadCurrencies();
                 ClearInputFields();
+
+                addButton.Enabled = true;
+                updateButton.Enabled = false;
+                deleteButton.Enabled = false;
             }
             catch (Exception ex)
             {
@@ -107,6 +119,10 @@ namespace AccountingSystem.UI
                 currencyIdTextBox.Text = row.Cells["CurrencyID"].Value.ToString();
                 currencyCodeTextBox.Text = row.Cells["CurrencyCode"].Value.ToString();
                 exchangeRateNumericUpDown.Value = Convert.ToDecimal(row.Cells["ExchangeRate"].Value);
+
+                addButton.Enabled = false;
+                updateButton.Enabled = true;
+                deleteButton.Enabled = true;
             }
         }
 

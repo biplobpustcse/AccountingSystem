@@ -111,7 +111,7 @@
             // 
             // addButton
             // 
-            addButton.Location = new Point(373, 343);
+            addButton.Location = new Point(117, 452);
             addButton.Margin = new Padding(4, 3, 4, 3);
             addButton.Name = "addButton";
             addButton.Size = new Size(88, 27);
@@ -122,7 +122,7 @@
             // 
             // updateButton
             // 
-            updateButton.Location = new Point(467, 343);
+            updateButton.Location = new Point(211, 452);
             updateButton.Margin = new Padding(4, 3, 4, 3);
             updateButton.Name = "updateButton";
             updateButton.Size = new Size(88, 27);
@@ -133,7 +133,7 @@
             // 
             // deleteButton
             // 
-            deleteButton.Location = new Point(560, 343);
+            deleteButton.Location = new Point(304, 452);
             deleteButton.Margin = new Padding(4, 3, 4, 3);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(88, 27);
@@ -157,7 +157,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(670, 474);
+            ClientSize = new Size(670, 517);
             Controls.Add(lblVATList);
             Controls.Add(deleteButton);
             Controls.Add(updateButton);
