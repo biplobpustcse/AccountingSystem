@@ -20,6 +20,7 @@ CREATE TABLE ChartOfAccounts (
 	FOREIGN KEY (CurrencyID) REFERENCES Currency(CurrencyID)
 );
 
+
 -- VAT Tax Table
 CREATE TABLE VATTaxes (
     VATID INT IDENTITY(1,1) PRIMARY KEY,
