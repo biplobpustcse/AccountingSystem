@@ -1,6 +1,8 @@
 # Accounting System
 
 #### Step:1
+![image](https://github.com/user-attachments/assets/95baf45d-8f4d-4f0c-9a67-bc6682a65e5f)
+
 MS SQL Database Script
 
 ```
