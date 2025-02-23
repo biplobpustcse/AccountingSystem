@@ -54,4 +54,4 @@ CREATE TABLE Transactions (
 Widows Form Application with .NET 8, N-Tier Architecture, and the Repository Pattern
 
 #### Step:3
-Dapper ORM
+Dapper ORM,Serilog for logging.
