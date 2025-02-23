@@ -1,24 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace AccountingSystem.Models.Entities
+﻿namespace AccountingSystem.Models.Entities
 {
     public class TrialBalance
     {
-        //[Key]
-        //public int BalanceID { get; set; }
-
-        //[Required]
-        //public int AccountID { get; set; }
-        //public ChartOfAccount Account { get; set; }
-
-        //[Column(TypeName = "decimal(18,2)")]
-        //public decimal DebitTotal { get; set; } = 0;
-
-        //[Column(TypeName = "decimal(18,2)")]
-        //public decimal CreditTotal { get; set; } = 0;
-
-        //[Required]
-        //public DateTime BalanceDate { get; set; }
+        public string AccountNumber { get; set; }
+        public string AccountName { get; set; }
+        public decimal DebitBalance { get; set; }
+        public decimal CreditBalance { get; set; }
     }
 }

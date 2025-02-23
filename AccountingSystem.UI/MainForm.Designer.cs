@@ -37,13 +37,15 @@
             operationToolStripMenuItem = new ToolStripMenuItem();
             chartOfAccountsToolStripMenuItem = new ToolStripMenuItem();
             transactionsToolStripMenuItem = new ToolStripMenuItem();
+            reportToolStripMenuItem = new ToolStripMenuItem();
+            TrialBalancetoolStripMenuItem = new ToolStripMenuItem();
             lblWelcome = new Label();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
             // menuStrip1
             // 
-            menuStrip1.Items.AddRange(new ToolStripItem[] { closeToolStripMenuItem, setupToolStripMenuItem, operationToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { closeToolStripMenuItem, setupToolStripMenuItem, operationToolStripMenuItem, reportToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Padding = new Padding(7, 2, 0, 2);
@@ -113,6 +115,21 @@
             transactionsToolStripMenuItem.Text = "Transactions";
             transactionsToolStripMenuItem.Click += transactionsToolStripMenuItem_Click;
             // 
+            // reportToolStripMenuItem
+            // 
+            reportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { TrialBalancetoolStripMenuItem });
+            reportToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            reportToolStripMenuItem.Name = "reportToolStripMenuItem";
+            reportToolStripMenuItem.Size = new Size(58, 20);
+            reportToolStripMenuItem.Text = "Report";
+            // 
+            // TrialBalancetoolStripMenuItem
+            // 
+            TrialBalancetoolStripMenuItem.Name = "TrialBalancetoolStripMenuItem";
+            TrialBalancetoolStripMenuItem.Size = new Size(180, 22);
+            TrialBalancetoolStripMenuItem.Text = "TrialBalance";
+            TrialBalancetoolStripMenuItem.Click += TrialBalancetoolStripMenuItem_Click;
+            // 
             // lblWelcome
             // 
             lblWelcome.AutoSize = true;
@@ -156,5 +173,7 @@
         private System.Windows.Forms.ToolStripMenuItem transactionsToolStripMenuItem;
         private ToolStripMenuItem setupToolStripMenuItem;
         private Label lblWelcome;
+        private ToolStripMenuItem reportToolStripMenuItem;
+        private ToolStripMenuItem TrialBalancetoolStripMenuItem;
     }
 }

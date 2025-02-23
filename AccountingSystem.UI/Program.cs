@@ -9,6 +9,7 @@ namespace AccountingSystem.UI
 {
     internal static class Program
     {
+        #region Main method
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -48,7 +49,9 @@ namespace AccountingSystem.UI
                 Log.CloseAndFlush();
             }
         }
+        #endregion
 
+        #region Dependencies
         static IHostBuilder CreateHostBuilder()
         {
             return Host.CreateDefaultBuilder()
@@ -66,9 +69,12 @@ namespace AccountingSystem.UI
                     services.AddTransient<ICurrencyService, CurrencyService>();
                     services.AddTransient<VATTaxRepository>();
                     services.AddTransient<IVATTaxService, VATTaxService>();
+                    services.AddTransient<ReportRepository>();
+                    services.AddTransient<IReportService, ReportService>();
 
                     services.AddTransient<MainForm>();
                 });
-        }
+        } 
+        #endregion
     }
 }

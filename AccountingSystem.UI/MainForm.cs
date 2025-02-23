@@ -9,13 +9,15 @@ namespace AccountingSystem.UI
         private readonly ITransactionDetailService _transactionDetailService;
         private readonly ICurrencyService _currencyService;
         private readonly IVATTaxService _vatTaxService;
-        private int _transactionId; 
+        private readonly IReportService _reportService;
+        private int _transactionId;
 
         public MainForm(IChartOfAccountService chartOfAccountService,
             ITransactionService transactionService,
             ITransactionDetailService transactionDetailService,
             ICurrencyService currencyService,
-            IVATTaxService vatTaxService)
+            IVATTaxService vatTaxService,
+            IReportService reportService)
         {
             InitializeComponent();
             _chartOfAccountService = chartOfAccountService;
@@ -23,6 +25,7 @@ namespace AccountingSystem.UI
             _transactionDetailService = transactionDetailService;
             _currencyService = currencyService;
             _vatTaxService = vatTaxService;
+            _reportService = reportService;
         }
 
         private void currenciesToolStripMenuItem_Click(object sender, EventArgs e)
@@ -63,6 +66,10 @@ namespace AccountingSystem.UI
         public void SetTransactionId(int transactionId)
         {
             _transactionId = transactionId;
+        }
+        private void TrialBalancetoolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new TrialBalanceForm(_reportService));
         }
     }
 }
