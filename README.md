@@ -27,31 +27,49 @@ CREATE TABLE VATTaxes (
     EffectiveDate DATE NOT NULL
 );
 
--- Transactions Table
 CREATE TABLE Transactions (
     TransactionID INT IDENTITY(1,1) PRIMARY KEY,
     TransactionDate DATE NOT NULL,
     TransactionNumber VARCHAR(50) UNIQUE NOT NULL,
     Description NVARCHAR(500),
-    Reference NVARCHAR(255)
-);
-
--- Transaction Details Table
-CREATE TABLE TransactionDetails (
-    DetailID INT IDENTITY(1,1) PRIMARY KEY,
-    TransactionID INT NOT NULL,
+    Reference NVARCHAR(255),
     DebitAccountID INT NOT NULL,
     CreditAccountID INT NOT NULL,
     Amount DECIMAL(18,2) NOT NULL,
     VATID INT NULL,
     VATAmount DECIMAL(18,2) DEFAULT 0,
-	CurrencyID INT NOT NULL,
-    FOREIGN KEY (TransactionID) REFERENCES Transactions(TransactionID) ON DELETE CASCADE,
+    CurrencyID INT NOT NULL,
     FOREIGN KEY (DebitAccountID) REFERENCES ChartOfAccounts(AccountID),
     FOREIGN KEY (CreditAccountID) REFERENCES ChartOfAccounts(AccountID),
     FOREIGN KEY (VATID) REFERENCES VATTaxes(VATID),
-	FOREIGN KEY (CurrencyID) REFERENCES Currency(CurrencyID)
+    FOREIGN KEY (CurrencyID) REFERENCES Currency(CurrencyID)
 );
+
+---- Transactions Table
+--CREATE TABLE Transactions (
+--    TransactionID INT IDENTITY(1,1) PRIMARY KEY,
+--    TransactionDate DATE NOT NULL,
+--    TransactionNumber VARCHAR(50) UNIQUE NOT NULL,
+--    Description NVARCHAR(500),
+--    Reference NVARCHAR(255)
+--);
+
+---- Transaction Details Table
+--CREATE TABLE TransactionDetails (
+--    DetailID INT IDENTITY(1,1) PRIMARY KEY,
+--    TransactionID INT NOT NULL,
+--    DebitAccountID INT NOT NULL,
+--    CreditAccountID INT NOT NULL,
+--    Amount DECIMAL(18,2) NOT NULL,
+--    VATID INT NULL,
+--    VATAmount DECIMAL(18,2) DEFAULT 0,
+--	CurrencyID INT NOT NULL,
+--    FOREIGN KEY (TransactionID) REFERENCES Transactions(TransactionID) ON DELETE CASCADE,
+--    FOREIGN KEY (DebitAccountID) REFERENCES ChartOfAccounts(AccountID),
+--    FOREIGN KEY (CreditAccountID) REFERENCES ChartOfAccounts(AccountID),
+--    FOREIGN KEY (VATID) REFERENCES VATTaxes(VATID),
+--	FOREIGN KEY (CurrencyID) REFERENCES Currency(CurrencyID)
+--);
 
 ---- Trial Balance Table
 --CREATE TABLE TrialBalance (
