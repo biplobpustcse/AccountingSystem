@@ -16,6 +16,13 @@ namespace AccountingSystem.DAL.Repositories
         {
             using (var connection = context.CreateConnection())
             {
+                return connection.Query<ChartOfAccount>("SELECT * FROM ChartOfAccounts");
+            }
+        }
+        public IEnumerable<ChartOfAccount> GetAllActive()
+        {
+            using (var connection = context.CreateConnection())
+            {
                 return connection.Query<ChartOfAccount>("SELECT * FROM ChartOfAccounts WHERE IsActive = 1");
             }
         }

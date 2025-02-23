@@ -43,13 +43,22 @@ namespace AccountingSystem.UI
 
         private void LoadComboBoxes()
         {
-            debitAccountComboBox.DataSource = _chartOfAccountService.GetAllChartOfAccounts().ToList();
+            var ChartOfAccountList = _chartOfAccountService.GetAllActiveChartOfAccounts();
+            debitAccountComboBox.DataSource = ChartOfAccountList.ToList();
             debitAccountComboBox.DisplayMember = "AccountName";
             debitAccountComboBox.ValueMember = "AccountID";
 
-            creditAccountComboBox.DataSource = _chartOfAccountService.GetAllChartOfAccounts().ToList();
+            debitAccountSearchComboBox.DataSource = ChartOfAccountList.ToList();
+            debitAccountSearchComboBox.DisplayMember = "AccountName";
+            debitAccountSearchComboBox.ValueMember = "AccountID";
+
+            creditAccountComboBox.DataSource = ChartOfAccountList.ToList();
             creditAccountComboBox.DisplayMember = "AccountName";
             creditAccountComboBox.ValueMember = "AccountID";
+
+            creditAccountSearchComboBox.DataSource = ChartOfAccountList.ToList();
+            creditAccountSearchComboBox.DisplayMember = "AccountName";
+            creditAccountSearchComboBox.ValueMember = "AccountID";
 
             vatComboBox.DataSource = _vatTaxService.GetAllVATTaxs().ToList();
             vatComboBox.DisplayMember = "VATRate";
@@ -204,5 +213,46 @@ namespace AccountingSystem.UI
             transactionCounter++;
             return $"TXN-{datePart}-{counterPart}";
         }
+
+        // Add search and filter functionality here
+        private void searchButton_Click(object sender, EventArgs e)
+        {
+            // Get search criteria from UI controls
+            DateTime? startDate = startDatePicker.Value;
+            DateTime? endDate = endDatePicker.Value;
+            string descriptionFilter = descriptionSearchTextBox.Text;
+            int? debitAccountId = debitAccountSearchComboBox.SelectedValue != null ? (int?)debitAccountSearchComboBox.SelectedValue : null;
+            int? creditAccountId = creditAccountSearchComboBox.SelectedValue != null ? (int?)creditAccountSearchComboBox.SelectedValue : null;
+
+            try
+            {
+                // Call service to get filtered transactions
+                var filteredTransactions = _transactionService.SearchTransactions(startDate, endDate, descriptionFilter, debitAccountId, creditAccountId);
+
+                // Update DataGridView with filtered results
+                transactionsDataGridView.DataSource = filteredTransactions;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error searching transactions: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void ClearSearchFilters()
+        {
+            startDatePicker.Value = DateTime.Now.AddMonths(-1);
+            endDatePicker.Value = DateTime.Now;
+            descriptionSearchTextBox.Text = "";
+            debitAccountSearchComboBox.SelectedIndex = -1;
+            creditAccountSearchComboBox.SelectedIndex = -1;
+        }
+
+        private void clearSearchButton_Click(object sender, EventArgs e)
+        {
+            ClearSearchFilters();
+            LoadTransactions();
+        }
+
+      
     }
 }

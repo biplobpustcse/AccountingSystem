@@ -1,18 +1,17 @@
 ﻿using AccountingSystem.BLL;
 using AccountingSystem.Models.Entities;
-using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using System.Linq;
 using Microsoft.VisualBasic.FileIO;
 
 namespace AccountingSystem.UI
 {
     public partial class ChartOfAccountsForm : Form
     {
+        #region private field
         private readonly IChartOfAccountService _chartOfAccountService;
         private readonly ICurrencyService _currencyService; // Add currency service
+        #endregion
 
+        #region Constractor
         public ChartOfAccountsForm(IChartOfAccountService chartOfAccountService, ICurrencyService currencyService) // Modify constructor
         {
             InitializeComponent();
@@ -21,7 +20,9 @@ namespace AccountingSystem.UI
             LoadChartOfAccounts();
             LoadCurrencies(); // Load currencies into combobox
         }
+        #endregion
 
+        #region methods
         private void LoadCurrencies()
         {
             try
@@ -280,6 +281,7 @@ namespace AccountingSystem.UI
                 MessageBox.Show($"Error importing: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+        #endregion
 
     }
 }

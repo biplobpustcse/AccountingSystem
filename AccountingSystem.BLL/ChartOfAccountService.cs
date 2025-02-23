@@ -12,6 +12,7 @@ namespace AccountingSystem.BLL
             _repository = repository;
         }
         public IEnumerable<ChartOfAccount> GetAllChartOfAccounts()=> _repository.GetAll();
+        public IEnumerable<ChartOfAccount> GetAllActiveChartOfAccounts()=> _repository.GetAllActive();
         public ChartOfAccount GetChartOfAccountById(int accountId)=> _repository.GetById(accountId);
         public int InsertChartOfAccount(ChartOfAccount account)=> _repository.Insert(account);
         public int UpdateChartOfAccount(ChartOfAccount account)=> _repository.Update(account);

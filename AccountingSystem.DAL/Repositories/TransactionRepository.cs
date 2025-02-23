@@ -78,5 +78,45 @@ namespace AccountingSystem.DAL.Repositories
                 connection.Execute("DELETE FROM Transactions WHERE TransactionID = @TransactionID", new { TransactionID = transactionId });
             }
         }
+        public IEnumerable<Transaction> SearchTransactions(DateTime? startDate, DateTime? endDate, string descriptionFilter, int? debitAccountId, int? creditAccountId)
+        {
+            using (var connection = context.CreateConnection())
+            {
+                string sql = "SELECT * FROM Transactions WHERE 1=1";
+                DynamicParameters parameters = new DynamicParameters();
+
+                if (startDate.HasValue)
+                {
+                    sql += " AND TransactionDate >= @StartDate";
+                    parameters.Add("StartDate", startDate.Value.Date, DbType.Date);
+                }
+
+                if (endDate.HasValue)
+                {
+                    sql += " AND TransactionDate <= @EndDate";
+                    parameters.Add("EndDate", endDate.Value.Date.AddDays(1).AddSeconds(-1), DbType.DateTime);
+                }
+
+                if (!string.IsNullOrEmpty(descriptionFilter))
+                {
+                    sql += " AND Description LIKE @DescriptionFilter";
+                    parameters.Add("DescriptionFilter", "%" + descriptionFilter + "%", DbType.String);
+                }
+
+                if (debitAccountId.HasValue)
+                {
+                    sql += " AND DebitAccountID = @DebitAccountId";
+                    parameters.Add("DebitAccountId", debitAccountId, DbType.Int32);
+                }
+
+                if (creditAccountId.HasValue)
+                {
+                    sql += " AND CreditAccountID = @CreditAccountId";
+                    parameters.Add("CreditAccountId", creditAccountId, DbType.Int32);
+                }
+
+                return connection.Query<Transaction>(sql, parameters);
+            }
+        }
     }
 }
