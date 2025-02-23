@@ -50,6 +50,10 @@
             currencyComboBox = new ComboBox();
             lblAccoutNumberValidation = new Label();
             accountNameLabelValidation = new Label();
+            btnExport = new Button();
+            btnImport = new Button();
+            lblChartofAccount = new Label();
+            lblAccountInformation = new Label();
             ((System.ComponentModel.ISupportInitialize)chartOfAccountsDataGridView).BeginInit();
             ((System.ComponentModel.ISupportInitialize)openingBalanceNumericUpDown).BeginInit();
             SuspendLayout();
@@ -57,7 +61,7 @@
             // chartOfAccountsDataGridView
             // 
             chartOfAccountsDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            chartOfAccountsDataGridView.Location = new Point(14, 14);
+            chartOfAccountsDataGridView.Location = new Point(14, 39);
             chartOfAccountsDataGridView.Margin = new Padding(4, 3, 4, 3);
             chartOfAccountsDataGridView.Name = "chartOfAccountsDataGridView";
             chartOfAccountsDataGridView.Size = new Size(875, 288);
@@ -67,7 +71,7 @@
             // accountIdLabel
             // 
             accountIdLabel.AutoSize = true;
-            accountIdLabel.Location = new Point(14, 317);
+            accountIdLabel.Location = new Point(14, 383);
             accountIdLabel.Margin = new Padding(4, 0, 4, 0);
             accountIdLabel.Name = "accountIdLabel";
             accountIdLabel.Size = new Size(69, 15);
@@ -77,7 +81,7 @@
             // accountNumberLabel
             // 
             accountNumberLabel.AutoSize = true;
-            accountNumberLabel.Location = new Point(14, 346);
+            accountNumberLabel.Location = new Point(14, 412);
             accountNumberLabel.Margin = new Padding(4, 0, 4, 0);
             accountNumberLabel.Name = "accountNumberLabel";
             accountNumberLabel.Size = new Size(102, 15);
@@ -87,7 +91,7 @@
             // accountNameLabel
             // 
             accountNameLabel.AutoSize = true;
-            accountNameLabel.Location = new Point(14, 375);
+            accountNameLabel.Location = new Point(14, 441);
             accountNameLabel.Margin = new Padding(4, 0, 4, 0);
             accountNameLabel.Name = "accountNameLabel";
             accountNameLabel.Size = new Size(90, 15);
@@ -97,7 +101,7 @@
             // accountTypeLabel
             // 
             accountTypeLabel.AutoSize = true;
-            accountTypeLabel.Location = new Point(14, 404);
+            accountTypeLabel.Location = new Point(14, 470);
             accountTypeLabel.Margin = new Padding(4, 0, 4, 0);
             accountTypeLabel.Name = "accountTypeLabel";
             accountTypeLabel.Size = new Size(82, 15);
@@ -107,7 +111,7 @@
             // accountGroupLabel
             // 
             accountGroupLabel.AutoSize = true;
-            accountGroupLabel.Location = new Point(14, 433);
+            accountGroupLabel.Location = new Point(14, 499);
             accountGroupLabel.Margin = new Padding(4, 0, 4, 0);
             accountGroupLabel.Name = "accountGroupLabel";
             accountGroupLabel.Size = new Size(91, 15);
@@ -117,7 +121,7 @@
             // openingBalanceLabel
             // 
             openingBalanceLabel.AutoSize = true;
-            openingBalanceLabel.Location = new Point(14, 462);
+            openingBalanceLabel.Location = new Point(14, 528);
             openingBalanceLabel.Margin = new Padding(4, 0, 4, 0);
             openingBalanceLabel.Name = "openingBalanceLabel";
             openingBalanceLabel.Size = new Size(100, 15);
@@ -127,7 +131,7 @@
             // currencyIdLabel
             // 
             currencyIdLabel.AutoSize = true;
-            currencyIdLabel.Location = new Point(14, 490);
+            currencyIdLabel.Location = new Point(14, 556);
             currencyIdLabel.Margin = new Padding(4, 0, 4, 0);
             currencyIdLabel.Name = "currencyIdLabel";
             currencyIdLabel.Size = new Size(58, 15);
@@ -137,7 +141,7 @@
             // isActiveLabel
             // 
             isActiveLabel.AutoSize = true;
-            isActiveLabel.Location = new Point(14, 519);
+            isActiveLabel.Location = new Point(14, 585);
             isActiveLabel.Margin = new Padding(4, 0, 4, 0);
             isActiveLabel.Name = "isActiveLabel";
             isActiveLabel.Size = new Size(54, 15);
@@ -147,7 +151,7 @@
             // accountIdTextBox
             // 
             accountIdTextBox.Enabled = false;
-            accountIdTextBox.Location = new Point(140, 314);
+            accountIdTextBox.Location = new Point(140, 380);
             accountIdTextBox.Margin = new Padding(4, 3, 4, 3);
             accountIdTextBox.Name = "accountIdTextBox";
             accountIdTextBox.Size = new Size(174, 23);
@@ -155,7 +159,7 @@
             // 
             // accountNumberTextBox
             // 
-            accountNumberTextBox.Location = new Point(140, 343);
+            accountNumberTextBox.Location = new Point(140, 409);
             accountNumberTextBox.Margin = new Padding(4, 3, 4, 3);
             accountNumberTextBox.Name = "accountNumberTextBox";
             accountNumberTextBox.Size = new Size(174, 23);
@@ -164,7 +168,7 @@
             // 
             // accountNameTextBox
             // 
-            accountNameTextBox.Location = new Point(140, 372);
+            accountNameTextBox.Location = new Point(140, 438);
             accountNameTextBox.Margin = new Padding(4, 3, 4, 3);
             accountNameTextBox.Name = "accountNameTextBox";
             accountNameTextBox.Size = new Size(174, 23);
@@ -176,7 +180,7 @@
             accountTypeComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             accountTypeComboBox.FormattingEnabled = true;
             accountTypeComboBox.Items.AddRange(new object[] { "Asset", "Liability", "Equity", "Revenue", "Expense" });
-            accountTypeComboBox.Location = new Point(140, 400);
+            accountTypeComboBox.Location = new Point(140, 466);
             accountTypeComboBox.Margin = new Padding(4, 3, 4, 3);
             accountTypeComboBox.Name = "accountTypeComboBox";
             accountTypeComboBox.Size = new Size(174, 23);
@@ -184,7 +188,7 @@
             // 
             // accountGroupTextBox
             // 
-            accountGroupTextBox.Location = new Point(140, 429);
+            accountGroupTextBox.Location = new Point(140, 495);
             accountGroupTextBox.Margin = new Padding(4, 3, 4, 3);
             accountGroupTextBox.Name = "accountGroupTextBox";
             accountGroupTextBox.Size = new Size(174, 23);
@@ -193,7 +197,7 @@
             // openingBalanceNumericUpDown
             // 
             openingBalanceNumericUpDown.DecimalPlaces = 2;
-            openingBalanceNumericUpDown.Location = new Point(140, 458);
+            openingBalanceNumericUpDown.Location = new Point(140, 524);
             openingBalanceNumericUpDown.Margin = new Padding(4, 3, 4, 3);
             openingBalanceNumericUpDown.Maximum = new decimal(new int[] { 1000000000, 0, 0, 0 });
             openingBalanceNumericUpDown.Name = "openingBalanceNumericUpDown";
@@ -204,7 +208,7 @@
             // 
             isActiveCheckBox.AutoSize = true;
             isActiveCheckBox.Enabled = false;
-            isActiveCheckBox.Location = new Point(140, 517);
+            isActiveCheckBox.Location = new Point(140, 583);
             isActiveCheckBox.Margin = new Padding(4, 3, 4, 3);
             isActiveCheckBox.Name = "isActiveCheckBox";
             isActiveCheckBox.Size = new Size(15, 14);
@@ -213,7 +217,7 @@
             // 
             // addButton
             // 
-            addButton.Location = new Point(350, 314);
+            addButton.Location = new Point(13, 615);
             addButton.Margin = new Padding(4, 3, 4, 3);
             addButton.Name = "addButton";
             addButton.Size = new Size(88, 27);
@@ -224,7 +228,7 @@
             // 
             // updateButton
             // 
-            updateButton.Location = new Point(443, 314);
+            updateButton.Location = new Point(109, 615);
             updateButton.Margin = new Padding(4, 3, 4, 3);
             updateButton.Name = "updateButton";
             updateButton.Size = new Size(88, 27);
@@ -235,7 +239,7 @@
             // 
             // deleteButton
             // 
-            deleteButton.Location = new Point(537, 314);
+            deleteButton.Location = new Point(205, 615);
             deleteButton.Margin = new Padding(4, 3, 4, 3);
             deleteButton.Name = "deleteButton";
             deleteButton.Size = new Size(88, 27);
@@ -248,7 +252,7 @@
             // 
             currencyComboBox.DropDownStyle = ComboBoxStyle.DropDownList;
             currencyComboBox.FormattingEnabled = true;
-            currencyComboBox.Location = new Point(140, 487);
+            currencyComboBox.Location = new Point(140, 553);
             currencyComboBox.Margin = new Padding(4, 3, 4, 3);
             currencyComboBox.Name = "currencyComboBox";
             currencyComboBox.Size = new Size(174, 23);
@@ -258,7 +262,7 @@
             // 
             lblAccoutNumberValidation.AutoSize = true;
             lblAccoutNumberValidation.ForeColor = Color.Red;
-            lblAccoutNumberValidation.Location = new Point(316, 348);
+            lblAccoutNumberValidation.Location = new Point(316, 414);
             lblAccoutNumberValidation.Margin = new Padding(4, 0, 4, 0);
             lblAccoutNumberValidation.Name = "lblAccoutNumberValidation";
             lblAccoutNumberValidation.Size = new Size(12, 15);
@@ -269,18 +273,66 @@
             // 
             accountNameLabelValidation.AutoSize = true;
             accountNameLabelValidation.ForeColor = Color.Red;
-            accountNameLabelValidation.Location = new Point(316, 377);
+            accountNameLabelValidation.Location = new Point(316, 443);
             accountNameLabelValidation.Margin = new Padding(4, 0, 4, 0);
             accountNameLabelValidation.Name = "accountNameLabelValidation";
             accountNameLabelValidation.Size = new Size(12, 15);
             accountNameLabelValidation.TabIndex = 21;
             accountNameLabelValidation.Text = "*";
             // 
+            // btnExport
+            // 
+            btnExport.Location = new Point(802, 333);
+            btnExport.Margin = new Padding(4, 3, 4, 3);
+            btnExport.Name = "btnExport";
+            btnExport.Size = new Size(88, 27);
+            btnExport.TabIndex = 22;
+            btnExport.Text = "Export";
+            btnExport.UseVisualStyleBackColor = true;
+            btnExport.Click += btnExport_Click;
+            // 
+            // btnImport
+            // 
+            btnImport.Location = new Point(706, 333);
+            btnImport.Margin = new Padding(4, 3, 4, 3);
+            btnImport.Name = "btnImport";
+            btnImport.Size = new Size(88, 27);
+            btnImport.TabIndex = 23;
+            btnImport.Text = "Import";
+            btnImport.UseVisualStyleBackColor = true;
+            btnImport.Click += btnImport_Click;
+            // 
+            // lblChartofAccount
+            // 
+            lblChartofAccount.AutoSize = true;
+            lblChartofAccount.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblChartofAccount.Location = new Point(14, 9);
+            lblChartofAccount.Margin = new Padding(4, 0, 4, 0);
+            lblChartofAccount.Name = "lblChartofAccount";
+            lblChartofAccount.Size = new Size(125, 19);
+            lblChartofAccount.TabIndex = 24;
+            lblChartofAccount.Text = "Chart of Account:";
+            // 
+            // lblAccountInformation
+            // 
+            lblAccountInformation.AutoSize = true;
+            lblAccountInformation.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            lblAccountInformation.Location = new Point(14, 341);
+            lblAccountInformation.Margin = new Padding(4, 0, 4, 0);
+            lblAccountInformation.Name = "lblAccountInformation";
+            lblAccountInformation.Size = new Size(150, 19);
+            lblAccountInformation.TabIndex = 25;
+            lblAccountInformation.Text = "Account Information:";
+            // 
             // ChartOfAccountsForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(903, 555);
+            ClientSize = new Size(903, 676);
+            Controls.Add(lblAccountInformation);
+            Controls.Add(lblChartofAccount);
+            Controls.Add(btnImport);
+            Controls.Add(btnExport);
             Controls.Add(accountNameLabelValidation);
             Controls.Add(lblAccoutNumberValidation);
             Controls.Add(deleteButton);
@@ -336,5 +388,9 @@
         private System.Windows.Forms.ComboBox currencyComboBox;
         private Label lblAccoutNumberValidation;
         private Label accountNameLabelValidation;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.Button btnImport;
+        private Label lblChartofAccount;
+        private Label lblAccountInformation;
     }
 }
