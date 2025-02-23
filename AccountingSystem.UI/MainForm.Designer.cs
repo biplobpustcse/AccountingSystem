@@ -39,8 +39,10 @@
             transactionsToolStripMenuItem = new ToolStripMenuItem();
             reportToolStripMenuItem = new ToolStripMenuItem();
             TrialBalancetoolStripMenuItem = new ToolStripMenuItem();
-            lblWelcome = new Label();
             generalLedgerToolStripMenuItem = new ToolStripMenuItem();
+            balanceSheetToolStripMenuItem = new ToolStripMenuItem();
+            lblWelcome = new Label();
+            incomeStatementToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -118,7 +120,7 @@
             // 
             // reportToolStripMenuItem
             // 
-            reportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { TrialBalancetoolStripMenuItem, generalLedgerToolStripMenuItem });
+            reportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { TrialBalancetoolStripMenuItem, generalLedgerToolStripMenuItem, balanceSheetToolStripMenuItem, incomeStatementToolStripMenuItem });
             reportToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             reportToolStripMenuItem.Name = "reportToolStripMenuItem";
             reportToolStripMenuItem.Size = new Size(58, 20);
@@ -130,6 +132,20 @@
             TrialBalancetoolStripMenuItem.Size = new Size(180, 22);
             TrialBalancetoolStripMenuItem.Text = "Trial Balance";
             TrialBalancetoolStripMenuItem.Click += TrialBalancetoolStripMenuItem_Click;
+            // 
+            // generalLedgerToolStripMenuItem
+            // 
+            generalLedgerToolStripMenuItem.Name = "generalLedgerToolStripMenuItem";
+            generalLedgerToolStripMenuItem.Size = new Size(180, 22);
+            generalLedgerToolStripMenuItem.Text = "General Ledger";
+            generalLedgerToolStripMenuItem.Click += generalLedgerToolStripMenuItem_Click;
+            // 
+            // balanceSheetToolStripMenuItem
+            // 
+            balanceSheetToolStripMenuItem.Name = "balanceSheetToolStripMenuItem";
+            balanceSheetToolStripMenuItem.Size = new Size(180, 22);
+            balanceSheetToolStripMenuItem.Text = "Balance Sheet";
+            balanceSheetToolStripMenuItem.Click += balanceSheetToolStripMenuItem_Click;
             // 
             // lblWelcome
             // 
@@ -143,12 +159,12 @@
             lblWelcome.TabIndex = 1;
             lblWelcome.Text = "Welcome";
             // 
-            // generalLedgerToolStripMenuItem
+            // incomeStatementToolStripMenuItem
             // 
-            generalLedgerToolStripMenuItem.Name = "generalLedgerToolStripMenuItem";
-            generalLedgerToolStripMenuItem.Size = new Size(180, 22);
-            generalLedgerToolStripMenuItem.Text = "General Ledger";
-            generalLedgerToolStripMenuItem.Click += generalLedgerToolStripMenuItem_Click;
+            incomeStatementToolStripMenuItem.Name = "incomeStatementToolStripMenuItem";
+            incomeStatementToolStripMenuItem.Size = new Size(180, 22);
+            incomeStatementToolStripMenuItem.Text = "Income Statement";
+            incomeStatementToolStripMenuItem.Click += incomeStatementToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -184,5 +200,7 @@
         private ToolStripMenuItem reportToolStripMenuItem;
         private ToolStripMenuItem TrialBalancetoolStripMenuItem;
         private ToolStripMenuItem generalLedgerToolStripMenuItem;
+        private ToolStripMenuItem balanceSheetToolStripMenuItem;
+        private ToolStripMenuItem incomeStatementToolStripMenuItem;
     }
 }

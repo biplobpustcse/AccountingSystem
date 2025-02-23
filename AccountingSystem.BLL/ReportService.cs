@@ -22,12 +22,12 @@ namespace AccountingSystem.BLL
             return _repository.GetGeneralLedger(accountId, startDate, endDate);
         }
 
-        public IEnumerable<dynamic> GetBalanceSheet(DateTime asOfDate)
+        public IEnumerable<BalanceSheet> GetBalanceSheet(DateTime asOfDate)
         {
             return _repository.GetBalanceSheet(asOfDate);
         }
 
-        public IEnumerable<dynamic> GetIncomeStatement(DateTime startDate, DateTime endDate)
+        public IEnumerable<IncomeStatement> GetIncomeStatement(DateTime startDate, DateTime endDate)
         {
             return _repository.GetIncomeStatement(startDate, endDate);
         }

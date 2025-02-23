@@ -68,5 +68,15 @@ namespace AccountingSystem.UI
         {
             OpenForm(new GeneralLedgerForm(_reportService, _chartOfAccountService));
         }
+
+        private void balanceSheetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new BalanceSheetForm(_reportService));
+        }
+
+        private void incomeStatementToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new IncomeStatementForm(_reportService));
+        }
     }
 }

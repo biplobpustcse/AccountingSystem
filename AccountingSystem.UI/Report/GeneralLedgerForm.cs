@@ -81,7 +81,7 @@ namespace AccountingSystem.UI
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
             string downloadsPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Downloads");
-            string fileName = "GeneralLedger" + Guid.NewGuid() + ".xlsx";
+            string fileName = "GeneralLedger" + Guid.NewGuid() + ".XLS";
             string filePath = Path.Combine(downloadsPath, fileName);
             ExportGeneralLedgerToExcel(filePath);
         }

@@ -48,11 +48,11 @@ namespace AccountingSystem.DAL.Repositories
             }
         }
 
-        public IEnumerable<dynamic> GetBalanceSheet(DateTime asOfDate)
+        public IEnumerable<BalanceSheet> GetBalanceSheet(DateTime asOfDate)
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.Query(@"
+                return connection.Query<BalanceSheet>(@"
                     -- Assets
                     SELECT
                         ca.AccountNumber,
@@ -62,10 +62,10 @@ namespace AccountingSystem.DAL.Repositories
                                 WHEN t.CreditAccountID = ca.AccountID THEN -t.Amount -- Subtract credits for asset accounts
                                 ELSE 0
                             END) AS Balance,
-                            'Asset' as AccountCategory
+                            'Asset' as AccountType
                     FROM ChartOfAccounts ca
                     LEFT JOIN Transactions t ON ca.AccountID = t.DebitAccountID OR ca.AccountID = t.CreditAccountID
-                    WHERE ca.AccountCategory = 'Asset' AND t.TransactionDate <= @AsOfDate
+                    WHERE ca.AccountType = 'Asset' AND t.TransactionDate <= @AsOfDate
                     GROUP BY ca.AccountNumber, ca.AccountName
 
                     UNION ALL
@@ -79,10 +79,10 @@ namespace AccountingSystem.DAL.Repositories
                                 WHEN t.DebitAccountID = ca.AccountID THEN -t.Amount -- Subtract debits for liability accounts
                                 ELSE 0
                             END) AS Balance,
-                            'Liability' as AccountCategory
+                            'Liability' as AccountType
                     FROM ChartOfAccounts ca
                     LEFT JOIN Transactions t ON ca.AccountID = t.DebitAccountID OR ca.AccountID = t.CreditAccountID
-                    WHERE ca.AccountCategory = 'Liability' AND t.TransactionDate <= @AsOfDate
+                    WHERE ca.AccountType = 'Liability' AND t.TransactionDate <= @AsOfDate
                     GROUP BY ca.AccountNumber, ca.AccountName
 
                     UNION ALL
@@ -96,19 +96,53 @@ namespace AccountingSystem.DAL.Repositories
                                 WHEN t.DebitAccountID = ca.AccountID THEN -t.Amount -- Subtract debits for equity accounts
                                 ELSE 0
                             END) AS Balance,
-                            'Equity' as AccountCategory
+                            'Equity' as AccountType
                     FROM ChartOfAccounts ca
                     LEFT JOIN Transactions t ON ca.AccountID = t.DebitAccountID OR ca.AccountID = t.CreditAccountID
-                    WHERE ca.AccountCategory = 'Equity' AND t.TransactionDate <= @AsOfDate
-                    GROUP BY ca.AccountNumber, ca.AccountName;", new { AsOfDate = asOfDate });
+                    WHERE ca.AccountType = 'Equity' AND t.TransactionDate <= @AsOfDate
+                    GROUP BY ca.AccountNumber, ca.AccountName
+
+                    UNION ALL
+
+                     -- Revenue
+                     SELECT
+                         ca.AccountNumber,
+                         ca.AccountName,
+                         SUM(CASE
+                                 WHEN t.CreditAccountID = ca.AccountID THEN t.Amount
+                                 WHEN t.DebitAccountID = ca.AccountID THEN -t.Amount -- Subtract debits for equity accounts
+                                 ELSE 0
+                             END) AS Balance,
+                             'Revenue' as AccountCategory
+                     FROM ChartOfAccounts ca
+                     LEFT JOIN Transactions t ON ca.AccountID = t.DebitAccountID OR ca.AccountID = t.CreditAccountID
+                     WHERE ca.AccountType = 'Revenue' --AND t.TransactionDate <= @AsOfDate
+                     GROUP BY ca.AccountNumber, ca.AccountName;
+
+                      -- Expense
+                     SELECT
+                         ca.AccountNumber,
+                         ca.AccountName,
+                         SUM(CASE
+                                 WHEN t.CreditAccountID = ca.AccountID THEN t.Amount
+                                 WHEN t.DebitAccountID = ca.AccountID THEN -t.Amount -- Subtract debits for equity accounts
+                                 ELSE 0
+                             END) AS Balance,
+                             'Expense' as AccountCategory
+                     FROM ChartOfAccounts ca
+                     LEFT JOIN Transactions t ON ca.AccountID = t.DebitAccountID OR ca.AccountID = t.CreditAccountID
+                     WHERE ca.AccountType = 'Expense' --AND t.TransactionDate <= @AsOfDate
+                     GROUP BY ca.AccountNumber, ca.AccountName;", new { AsOfDate = asOfDate });
+
+
             }
         }
 
-        public IEnumerable<dynamic> GetIncomeStatement(DateTime startDate, DateTime endDate)
+        public IEnumerable<IncomeStatement> GetIncomeStatement(DateTime startDate, DateTime endDate)
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.Query(@"
+                return connection.Query<IncomeStatement>(@"
                     -- Revenue
                     SELECT
                         ca.AccountNumber,
@@ -118,10 +152,10 @@ namespace AccountingSystem.DAL.Repositories
                                 WHEN t.DebitAccountID = ca.AccountID THEN -t.Amount -- Subtract debits for revenue accounts
                                 ELSE 0
                             END) AS Balance,
-                            'Revenue' as AccountCategory
+                            'Revenue' as AccountType
                     FROM ChartOfAccounts ca
                     LEFT JOIN Transactions t ON ca.AccountID = t.DebitAccountID OR ca.AccountID = t.CreditAccountID
-                    WHERE ca.AccountCategory = 'Revenue'
+                    WHERE ca.AccountType = 'Revenue'
                         AND t.TransactionDate BETWEEN @StartDate AND @EndDate
                     GROUP BY ca.AccountNumber, ca.AccountName
 
@@ -136,10 +170,10 @@ namespace AccountingSystem.DAL.Repositories
                                 WHEN t.CreditAccountID = ca.AccountID THEN -t.Amount -- Subtract credits for expense accounts
                                 ELSE 0
                             END) AS Balance,
-                            'Expense' as AccountCategory
+                            'Expense' as AccountType
                     FROM ChartOfAccounts ca
                     LEFT JOIN Transactions t ON ca.AccountID = t.DebitAccountID OR ca.AccountID = t.CreditAccountID
-                    WHERE ca.AccountCategory = 'Expense'
+                    WHERE ca.AccountType = 'Expense'
                         AND t.TransactionDate BETWEEN @StartDate AND @EndDate
                     GROUP BY ca.AccountNumber, ca.AccountName;", new { StartDate = startDate, EndDate = endDate });
             }
