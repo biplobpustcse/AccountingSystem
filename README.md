@@ -1,4 +1,8 @@
-# AccountingSystem
+# Accounting System
+
+#### Step:1
+MS SQL Database Script
+
 ```
 -- Currency Table
 CREATE TABLE Currency (
@@ -46,3 +50,8 @@ CREATE TABLE Transactions (
     FOREIGN KEY (CurrencyID) REFERENCES Currency(CurrencyID)
 );
 ```
+#### Step:2
+Widows Form Application with .NET 8, N-Tier Architecture, and the Repository Pattern
+
+#### Step:3
+Dapper ORM
