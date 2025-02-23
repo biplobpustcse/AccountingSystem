@@ -6,7 +6,6 @@ namespace AccountingSystem.UI
     {
         private readonly IChartOfAccountService _chartOfAccountService;
         private readonly ITransactionService _transactionService;
-        private readonly ITransactionDetailService _transactionDetailService;
         private readonly ICurrencyService _currencyService;
         private readonly IVATTaxService _vatTaxService;
         private readonly IReportService _reportService;
@@ -14,7 +13,6 @@ namespace AccountingSystem.UI
 
         public MainForm(IChartOfAccountService chartOfAccountService,
             ITransactionService transactionService,
-            ITransactionDetailService transactionDetailService,
             ICurrencyService currencyService,
             IVATTaxService vatTaxService,
             IReportService reportService)
@@ -22,7 +20,6 @@ namespace AccountingSystem.UI
             InitializeComponent();
             _chartOfAccountService = chartOfAccountService;
             _transactionService = transactionService;
-            _transactionDetailService = transactionDetailService;
             _currencyService = currencyService;
             _vatTaxService = vatTaxService;
             _reportService = reportService;
@@ -48,11 +45,6 @@ namespace AccountingSystem.UI
             OpenForm(new TransactionsForm(_transactionService, _chartOfAccountService, _vatTaxService, _currencyService));
         }
 
-        private void transactionDetailsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            OpenForm(new TransactionDetailsForm(_transactionDetailService, _chartOfAccountService, _vatTaxService, _currencyService, _transactionId));
-        }
-
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -70,6 +62,11 @@ namespace AccountingSystem.UI
         private void TrialBalancetoolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenForm(new TrialBalanceForm(_reportService));
+        }
+
+        private void generalLedgerToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenForm(new GeneralLedgerForm(_reportService, _chartOfAccountService));
         }
     }
 }

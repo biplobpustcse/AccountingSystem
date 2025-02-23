@@ -1,8 +1,7 @@
 ﻿using AccountingSystem.BLL;
-using iTextSharp.text.pdf;
 using iTextSharp.text;
+using iTextSharp.text.pdf;
 using System.Diagnostics;
-using Document = iTextSharp.text.Document;
 
 namespace AccountingSystem.UI
 {

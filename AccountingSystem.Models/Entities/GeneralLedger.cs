@@ -1,28 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-
-namespace AccountingSystem.Models.Entities
+﻿namespace AccountingSystem.Models.Entities
 {
     public class GeneralLedger
     {
-        //[Key]
-        //public int LedgerID { get; set; }
-
-        //[Required]
-        //public int AccountID { get; set; }
-        //public ChartOfAccount Account { get; set; }
-
-        //[Required]
-        //public int TransactionID { get; set; }
-        //public Transaction Transaction { get; set; }
-
-        //[Column(TypeName = "decimal(18,2)")]
-        //public decimal DebitAmount { get; set; } = 0;
-
-        //[Column(TypeName = "decimal(18,2)")]
-        //public decimal CreditAmount { get; set; } = 0;
-
-        //[Column(TypeName = "decimal(18,2)")]
-        //public decimal Balance { get; set; } = 0;
+        public DateTime TransactionDate { get; set; }
+        public string TransactionNumber { get; set; }
+        public string Description { get; set; }
+        public string Reference { get; set; }
+        public decimal DebitAmount { get; set; }
+        public decimal CreditAmount { get; set; }        
     }
 }

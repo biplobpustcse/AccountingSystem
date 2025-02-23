@@ -17,7 +17,7 @@ namespace AccountingSystem.BLL
             return _repository.GetTrialBalance(endDate);
         }
 
-        public IEnumerable<dynamic> GetGeneralLedger(int accountId, DateTime startDate, DateTime endDate)
+        public IEnumerable<GeneralLedger> GetGeneralLedger(int accountId, DateTime startDate, DateTime endDate)
         {
             return _repository.GetGeneralLedger(accountId, startDate, endDate);
         }

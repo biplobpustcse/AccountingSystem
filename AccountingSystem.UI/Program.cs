@@ -63,8 +63,6 @@ namespace AccountingSystem.UI
                     services.AddTransient<IChartOfAccountService, ChartOfAccountService>();
                     services.AddTransient<TransactionRepository>();
                     services.AddTransient<ITransactionService, TransactionService>();
-                    services.AddTransient<TransactionDetailRepository>();
-                    services.AddTransient<ITransactionDetailService, TransactionDetailDetailService>();
                     services.AddTransient<CurrencyRepository>();
                     services.AddTransient<ICurrencyService, CurrencyService>();
                     services.AddTransient<VATTaxRepository>();

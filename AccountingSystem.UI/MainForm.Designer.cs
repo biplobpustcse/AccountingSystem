@@ -40,6 +40,7 @@
             reportToolStripMenuItem = new ToolStripMenuItem();
             TrialBalancetoolStripMenuItem = new ToolStripMenuItem();
             lblWelcome = new Label();
+            generalLedgerToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -104,20 +105,20 @@
             // chartOfAccountsToolStripMenuItem
             // 
             chartOfAccountsToolStripMenuItem.Name = "chartOfAccountsToolStripMenuItem";
-            chartOfAccountsToolStripMenuItem.Size = new Size(180, 22);
+            chartOfAccountsToolStripMenuItem.Size = new Size(173, 22);
             chartOfAccountsToolStripMenuItem.Text = "Chart of Accounts";
             chartOfAccountsToolStripMenuItem.Click += chartOfAccountsToolStripMenuItem_Click;
             // 
             // transactionsToolStripMenuItem
             // 
             transactionsToolStripMenuItem.Name = "transactionsToolStripMenuItem";
-            transactionsToolStripMenuItem.Size = new Size(180, 22);
+            transactionsToolStripMenuItem.Size = new Size(173, 22);
             transactionsToolStripMenuItem.Text = "Transactions";
             transactionsToolStripMenuItem.Click += transactionsToolStripMenuItem_Click;
             // 
             // reportToolStripMenuItem
             // 
-            reportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { TrialBalancetoolStripMenuItem });
+            reportToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { TrialBalancetoolStripMenuItem, generalLedgerToolStripMenuItem });
             reportToolStripMenuItem.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
             reportToolStripMenuItem.Name = "reportToolStripMenuItem";
             reportToolStripMenuItem.Size = new Size(58, 20);
@@ -127,7 +128,7 @@
             // 
             TrialBalancetoolStripMenuItem.Name = "TrialBalancetoolStripMenuItem";
             TrialBalancetoolStripMenuItem.Size = new Size(180, 22);
-            TrialBalancetoolStripMenuItem.Text = "TrialBalance";
+            TrialBalancetoolStripMenuItem.Text = "Trial Balance";
             TrialBalancetoolStripMenuItem.Click += TrialBalancetoolStripMenuItem_Click;
             // 
             // lblWelcome
@@ -141,6 +142,13 @@
             lblWelcome.Size = new Size(82, 21);
             lblWelcome.TabIndex = 1;
             lblWelcome.Text = "Welcome";
+            // 
+            // generalLedgerToolStripMenuItem
+            // 
+            generalLedgerToolStripMenuItem.Name = "generalLedgerToolStripMenuItem";
+            generalLedgerToolStripMenuItem.Size = new Size(180, 22);
+            generalLedgerToolStripMenuItem.Text = "General Ledger";
+            generalLedgerToolStripMenuItem.Click += generalLedgerToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -175,5 +183,6 @@
         private Label lblWelcome;
         private ToolStripMenuItem reportToolStripMenuItem;
         private ToolStripMenuItem TrialBalancetoolStripMenuItem;
+        private ToolStripMenuItem generalLedgerToolStripMenuItem;
     }
 }

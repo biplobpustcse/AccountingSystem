@@ -29,11 +29,11 @@ namespace AccountingSystem.DAL.Repositories
             }
         }
 
-        public IEnumerable<dynamic> GetGeneralLedger(int accountId, DateTime startDate, DateTime endDate)
+        public IEnumerable<GeneralLedger> GetGeneralLedger(int accountId, DateTime startDate, DateTime endDate)
         {
             using (var connection = context.CreateConnection())
             {
-                return connection.Query(@"
+                return connection.Query<GeneralLedger>(@"
                     SELECT
                         t.TransactionDate,
                         t.TransactionNumber,
