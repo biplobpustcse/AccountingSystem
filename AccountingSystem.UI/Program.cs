@@ -1,10 +1,9 @@
 using AccountingSystem.BLL;
 using AccountingSystem.DAL;
 using AccountingSystem.DAL.Repositories;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 
 namespace AccountingSystem.UI
 {
@@ -16,28 +15,44 @@ namespace AccountingSystem.UI
         [STAThread]
         static void Main()
         {
-            //// To customize application configuration such as set high DPI settings or default font,
-            //// see https://aka.ms/applicationconfiguration.
-            //ApplicationConfiguration.Initialize();
-            //Application.Run(new Form1());
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug() // Set your desired minimum log level
+                .WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Day) // Log to a file
+                .CreateLogger();
 
-            var host = CreateHostBuilder().Build();
+            try
+            {
+                Log.Information("Application starting up");
 
-            ApplicationConfiguration.Initialize();
+                var host = CreateHostBuilder().Build();
 
-            // Retrieve the main form from the DI container
-            var mainForm = host.Services.GetRequiredService<MainForm>();
+                ApplicationConfiguration.Initialize();
 
-            // Run the application
-            Application.Run(mainForm);
+                // Retrieve the main form from the DI container
+                var mainForm = host.Services.GetRequiredService<MainForm>();
 
-            // Dispose of the host to ensure graceful shutdown
-            host.Dispose();
+                // Run the application
+                Application.Run(mainForm);
+
+                // Dispose of the host to ensure graceful shutdown
+                host.Dispose();
+
+                Log.Information("Application shutting down gracefully");
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Application terminated unexpectedly");
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         static IHostBuilder CreateHostBuilder()
         {
             return Host.CreateDefaultBuilder()
+                .UseSerilog() // Integrate Serilog into the host
                 .ConfigureServices((context, services) =>
                 {
                     services.AddSingleton<DapperContext>();
@@ -53,9 +68,7 @@ namespace AccountingSystem.UI
                     services.AddTransient<IVATTaxService, VATTaxService>();
 
                     services.AddTransient<MainForm>();
-                    // Register other forms as needed
                 });
         }
-
     }
 }
